@@ -31,3 +31,17 @@ def getCursor():
 @app.route("/")
 def home():
     return render_template("home.html")
+
+
+@app.route("/liststaff")
+def liststaff():
+    cursor = getCursor()
+    cursor.execute("SELECT * FROM staff")
+    result = cursor.fetchall()
+    return render_template("stafflist.html", stafflist = result)
+
+@app.route("/listapiarist")
+def listapiarist():
+    cursor = getCursor()
+    cursor.execute("SELECT * FROM apiarist")
+    return render_template("home.html")
