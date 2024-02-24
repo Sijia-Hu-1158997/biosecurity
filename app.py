@@ -23,7 +23,7 @@ def getCursor():
     global dbconn
     global connection
     connection = mysql.connector.connect(user=connect.dbuser, \
-    password=connect.dbpass, host=connect.dbhost, auth_plugin='mysql_native_password',\
+    password=connect.dbpass, host=connect.dbhost,\
     database=connect.dbname, autocommit=True)
     dbconn = connection.cursor()
     return dbconn
