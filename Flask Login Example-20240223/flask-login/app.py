@@ -15,6 +15,7 @@ app = Flask(__name__)
 hashing = Hashing(app)  #create an instance of hashing
 
 # Change this to your secret key (can be anything, it's for extra protection)
+app.secret_key = 'your secret key'
 
 dbconn = None
 connection = None
@@ -23,33 +24,12 @@ def getCursor():
     global dbconn
     global connection
     connection = mysql.connector.connect(user=connect.dbuser, \
-    password=connect.dbpass, host=connect.dbhost,\
+    password=connect.dbpass, host=connect.dbhost, auth_plugin='mysql_native_password',\
     database=connect.dbname, autocommit=True)
     dbconn = connection.cursor()
     return dbconn
 
-@app.route("/")
-def home():
-    return render_template("home.html")
-
-
-@app.route("/liststaff")
-def liststaff():
-    cursor = getCursor()
-    cursor.execute("SELECT * FROM staff")
-    staffresult = cursor.fetchall()
-
-    cursor.execute("SELECT * FROM apiarist")
-    apiaristresult = cursor.fetchall()
-
-    return render_template("stafflist.html", stafflist = staffresult,apiaristlist = apiaristresult)
-
-@app.route("/listapiarist")
-def listapiarist():
-    cursor = getCursor()
-    cursor.execute("SELECT * FROM apiarist")
-    return render_template("home.html")
-
+# http://localhost:5000/login/ - this will be the login page, we need to use both GET and POST requests
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
     # Output message if something goes wrong...
@@ -83,8 +63,7 @@ def login():
     # Show the login form with message (if any)
     return render_template('index.html', msg=msg)
 
-
-
+# http://localhost:5000/register - this will be the registration page, we need to use both GET and POST requests
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     # Output message if something goes wrong...
@@ -119,3 +98,40 @@ def register():
         msg = 'Please fill out the form!'
     # Show registration form with message (if any)
     return render_template('register.html', msg=msg)
+
+# http://localhost:5000/home - this will be the home page, only accessible for loggedin users
+@app.route('/home')
+def home():
+    # Check if user is loggedin
+    if 'loggedin' in session:
+        # User is loggedin show them the home page
+        return render_template('home.html', username=session['username'])
+    # User is not loggedin redirect to login page
+    return redirect(url_for('login'))
+
+# http://localhost:5000/profile - this will be the profile page, only accessible for loggedin users
+@app.route('/profile')
+def profile():
+    # Check if user is loggedin
+    if 'loggedin' in session:
+        # We need all the account info for the user so we can display it on the profile page
+        cursor = getCursor()
+        cursor.execute('SELECT * FROM secureaccount WHERE id = %s', (session['id'],))
+        account = cursor.fetchone()
+        # Show the profile page with account info
+        return render_template('profile.html', account=account)
+    # User is not loggedin redirect to login page
+    return redirect(url_for('login'))
+
+# http://localhost:5000/logout - this will be the logout page
+@app.route('/logout')
+def logout():
+    # Remove session data, this will log the user out
+   session.pop('loggedin', None)
+   session.pop('id', None)
+   session.pop('username', None)
+   # Redirect to login page
+   return redirect(url_for('login'))
+
+if __name__ == '__main__':
+    app.run(debug=True)
