@@ -27,18 +27,55 @@ VALUES (
 
 
 INSERT INTO bee_pests_and_diseases (`bee_item_type`, `present_in_nz`, `common_name`, `scientific_name`) 
-VALUES ('disease', 'yes','American foulbrood', 'Paenibacillus larvae');
+VALUES ('pest', 'yes','Varroa mites', 'Varroa destructor');
 
 INSERT INTO bee_infor (bee_id, `characteristics`, `biology`, `symptoms`, `images`)
 VALUES (
     2,
-    'Paenibacillus larvae is a rod-shaped bacterium visible only under a high power microscope. 
-    Larvae up to three days old become infected by ingesting spores present in their food. 
-    Young larvae less than 24 hours old are most susceptible to infection.',
-    'American foulbrood (AFB) is a fatal bacterial disease of honey bee brood caused by 
-    the spore forming bacterium Paenibacillus larvae.',
-    'Symptoms can include cell cappings that are sunken, perforated, darkened, or 
-    greasy-looking, as well as irregular brood pattern in advanced infections. 
-    Look closely, as early infections may only have one or two cells showing symptoms.',
-    LOAD_FILE('iCloud Drive/Documents/GitHub/biosecurity/images/AFB.png')
+    'Varroa mites are one of the most problematic pests of honey bees
+    (Apis mellifera). If not controlled, varroa can seriously undermine a
+    bee by feeding on their body tissues and enhancing transmission of
+    bee viruses. When left unchecked, varroa can spread throughout a
+    hive very quickly, cause parasitic mite syndrome and the eventual
+    death of the colony. ',
+    'Varroa mites are parasitic mites, which require a honey bee host to survive and reproduce. ',
+    'Female varroa mites can be seen throughout a hive both on adult
+    honey bees as well as developing larvae and pupae. Female mites
+    are oval shaped, reddish to dark brown in colour, and measure up to
+    2 mm across. ',
+    LOAD_FILE('iCloud Drive/Documents/GitHub/biosecurity/images/Varroa mites.jepg')
+);
+
+INSERT INTO bee_pests_and_diseases (`bee_item_type`, `present_in_nz`, `common_name`, `scientific_name`) 
+VALUES ('disease', 'yes','Nosema', 'Nosemosis');
+
+INSERT INTO bee_infor (bee_id, `characteristics`, `biology`, `symptoms`, `images`)
+VALUES (
+    3,
+    'They are completely oval with a dark edge. Their contents, consisting of nucleus, sporoplasm and polar tube, cannot be seen.',
+    'Nosema is a disease of honey bees caused by two species of
+    microsporidian parasites (a type of spore forming fungus) called
+    Nosema apis and Nosema ceranae. B',
+    'Symptoms are related to digestive system disturbances. They are
+    more apparent when nutrition is poor and weather conditions are
+    cold and wet. Sometimes, dysentery is observed, the lifespan of
+    bees are reduced and the colony dwindles in late winter or early
+    spring  ',
+    LOAD_FILE('iCloud Drive/Documents/GitHub/biosecurity/images/Nosema.jepg')
+);
+
+INSERT INTO bee_pests_and_diseases (`bee_item_type`, `present_in_nz`, `common_name`, `scientific_name`) 
+VALUES ('disease', 'yes','Chalkbrood Disease', 'Ascosphaera apis');
+
+INSERT INTO bee_infor (bee_id, `characteristics`, `biology`, `symptoms`, `images`)
+VALUES (
+    4,
+    'It causes the chalkbrood diseases in bees, which rarely kills infected colonies but can weaken them and lead to reduced honey yields[4] and susceptibility to other pests and diseases.',
+    'Chalkbrood is a disease of honey bees caused by the fungus
+    Ascosphaera apis.',
+    'In infected colonies some larvae are covered by white fungus. This
+    gives them a “chalky” and whiter appearance than that of healthy
+    larvae. The brood may appear scattered with cell caps of dead
+    larvae containing small holes and slightly flattened. ',
+    LOAD_FILE('iCloud Drive/Documents/GitHub/biosecurity/images/Chalkbrood Disease.jepg')
 );
