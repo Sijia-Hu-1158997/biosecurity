@@ -11,7 +11,12 @@ from mysql.connector import FieldType
 import connect
 from flask_hashing import Hashing
 
-app = Flask(__name__)
+from folder import app
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
+
 hashing = Hashing(app)  #create an instance of hashing
 
 # Change this to your secret key (can be anything, it's for extra protection)
@@ -29,6 +34,7 @@ def getCursor():
     return dbconn
 
 @app.route("/")
+@app.route("/home")
 def home():
     return render_template("home.html")
 

@@ -17,12 +17,11 @@ VALUES (
     'Paenibacillus larvae is a rod-shaped bacterium visible only under a high power microscope. 
     Larvae up to three days old become infected by ingesting spores present in their food. 
     Young larvae less than 24 hours old are most susceptible to infection.',
-    'American foulbrood (AFB) is a fatal bacterial disease of honey bee brood caused by 
-    the spore forming bacterium Paenibacillus larvae.',
+    'AFB is caused when young larvae are fed spores of the bacterium, which then germinate and multiply rapidly in the tissues of the larvae, generating billions of new spores. Death then typically happens at the pupal stage. ',
     'Symptoms can include cell cappings that are sunken, perforated, darkened, or 
     greasy-looking, as well as irregular brood pattern in advanced infections. 
     Look closely, as early infections may only have one or two cells showing symptoms.',
-    LOAD_FILE('iCloud Drive/Documents/GitHub/biosecurity/images/AFB.png')
+    LOAD_FILE('iCloud Drive/Documents/GitHub/biosecurity/images/AFB.jepg')
 );
 
 
@@ -78,4 +77,118 @@ VALUES (
     larvae. The brood may appear scattered with cell caps of dead
     larvae containing small holes and slightly flattened. ',
     LOAD_FILE('iCloud Drive/Documents/GitHub/biosecurity/images/Chalkbrood Disease.jepg')
+);
+
+
+INSERT INTO bee_pests_and_diseases (`bee_item_type`, `present_in_nz`, `common_name`, `scientific_name`) 
+VALUES ('disease', 'yes','Sacbrood', 'Sacbrood virus');
+
+INSERT INTO bee_infor (bee_id, `characteristics`, `biology`, `symptoms`, `images`)
+VALUES (
+    5,
+    'Sacbrood is a disease caused by the sacbrood virus. It can prevent
+    honey bee larvae from turning into pupa (and eventually an adult
+    bee), and the larvae die in their skin forming a sac, much like a
+    water balloon. ',
+    'Sacbrood virus is one of the most widespread and common honey
+    bee viruses in the world, and can be detected in the most apiaries
+    in New Zealand. The virus infects adult honey bees and larvae, but
+    may not cause obvious symptoms in adult honey bees. Despite
+    being so common, most honey bee colonies are able to tolerate low
+    levels of sacbrood virus infection without suffering ill effect. ',
+    'Larvae are the only honey bee stage that shows obvious symptoms
+    from sacbrood virus infection. The virus is passed to larvae by
+    infected adult nurse bees during feeding. Infected larvae may die
+    shortly after capping, before they pupate. The larvae change from
+    white, to yellow, and then brown. Larvae usually die in the cells
+    with their heads facing up—the head and mouthparts usually turn
+    black. ',
+    LOAD_FILE('iCloud Drive/Documents/GitHub/biosecurity/images/Sacbrood.jpeg')
+);
+
+
+INSERT INTO bee_pests_and_diseases (`bee_item_type`, `present_in_nz`, `common_name`, `scientific_name`) 
+VALUES ('disease', 'yes','Deformed wing virus', ' Iflaviridae');
+
+INSERT INTO bee_infor (bee_id, `characteristics`, `biology`, `symptoms`, `images`)
+VALUES (
+    6,
+    'Deformed wing virus is named after one of the main symptoms it
+    can cause in adult honey bees, deformities of the wings, although
+    the virus can also have other effects on all life stages and castes of
+    honey bees.',
+    'It is one of are over 28 viruses that are known to infect
+    honey bees. Deformed wing virus is one of the most widespread and
+    common honey bee viruses in the world, and can be detected in
+    the most apiaries in New Zealand. Work by the Ministry for Primary
+    Industries has shown that New Zealand has the Deformed wing
+    virus A (DWV-A) subtype.',
+    'The deformed wings of adult bees are easily observed and are
+    unique to this viral infection. Other symptoms caused by Deformed
+    wing virus are not easily observed.',
+    LOAD_FILE('iCloud Drive/Documents/GitHub/biosecurity/images/DWV.jepg')
+);
+
+
+INSERT INTO bee_pests_and_diseases (`bee_item_type`, `present_in_nz`, `common_name`, `scientific_name`) 
+VALUES ('disease', 'yes','Black queen cell virus', 'Dicistroviridae');
+
+INSERT INTO bee_infor (bee_id, `characteristics`, `biology`, `symptoms`, `images`)
+VALUES (
+    7,
+    'The black queen cell virus (BQCV) is a virus that infects honey bees, specifically Apis mellifera, Apis florea, and Apis dorsata.[1] Infection of the latter two species is more recent and can be attributed to genetic similarity and geographical closeness.',
+    'Black queen cell virus (BQCV) is caused by a virus in the Cripavirus genus. BQCV causes mortality in queen bee pupae, with dead queen bee larvae turning yellow and then brown-black. The disease is most common in spring and early summer.',
+    'Queen bee pupae turn yellow
+    and the skin of the pupae to become sac-like.
+    At later stages, the dead queen bee changes to
+    brown-black.',
+    LOAD_FILE('iCloud Drive/Documents/GitHub/biosecurity/images/Black queen cell virus.jepg')
+);
+
+
+INSERT INTO bee_pests_and_diseases (`bee_item_type`, `present_in_nz`, `common_name`, `scientific_name`) 
+VALUES ('pest', 'yes','Wax Moth', 'Achroia grisella and Galleria mellonella ');
+
+INSERT INTO bee_infor (bee_id, `characteristics`, `biology`, `symptoms`, `images`)
+VALUES (
+    8,
+    'There are two species of wax moth, the Greater wax moth (Galleria mellonella) and the Lesser wax moth (Achroia grisella). Both species eat beeswax, particularly unprocessed wax, pollen, remains of larval honey bees, honey bee cocoon silk and enclosed honey bee faeces found on walls of brood cells.',
+    'Both species are pests of active hives; however they will usually take advantage of already diseased or declining honey bee colonies and will therefore indicate to some other underlying problem(s) with the colony. Both Greater and Lesser wax moth will more commonly cause damage to unattended combs in storage, especially in areas that are dark, warm and poorly ventilated.',
+    'Wax moth are small and grey
+    (10-19 mm long). Larvae have dark heads with
+    several body segments. They create white, yellow
+    and/or dark brown cocoons.',
+    LOAD_FILE('iCloud Drive/Documents/GitHub/biosecurity/images/Wax Moth.jepg')
+);
+
+
+
+INSERT INTO bee_pests_and_diseases (`bee_item_type`, `present_in_nz`, `common_name`, `scientific_name`) 
+VALUES ('pest', 'yes','Vespula Wasps', 'Vespa germanica (German wasp) and Vespa vulgaris (common wasp) ');
+
+INSERT INTO bee_infor (bee_id, `characteristics`, `biology`, `symptoms`, `images`)
+VALUES (
+    9,
+    '....',
+    '...',
+    'German and common wasps look very similar.
+    They have spread throughout most of the country and are a
+    significant pest of urban, rural, and native ecosystems.',
+    LOAD_FILE('iCloud Drive/Documents/GitHub/biosecurity/images/....jepg')
+);
+
+
+INSERT INTO bee_pests_and_diseases (`bee_item_type`, `present_in_nz`, `common_name`, `scientific_name`) 
+VALUES ('disease', 'yes','Parasitic Mite Syndrome (PMS)', 'Parasitic Mite Syndrome (PMS)');
+
+INSERT INTO bee_infor (bee_id, `characteristics`, `biology`, `symptoms`, `images`)
+VALUES (
+    10,
+    '...',
+    '....',
+    'spotty brood pattern, lack of
+    adult population, high mite infestation, larvae do
+    not rope, and/or larvae are slumped and possibly
+    discoloured.',
+    LOAD_FILE('iCloud Drive/Documents/GitHub/biosecurity/images/....jepg')
 );
