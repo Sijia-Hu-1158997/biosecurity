@@ -1,4 +1,5 @@
-from flask import Flask
+from folder import app
+
 from flask import render_template
 from flask import request
 from flask import redirect
@@ -11,7 +12,7 @@ from mysql.connector import FieldType
 import connect
 from flask_hashing import Hashing
 
-from folder import app
+
 
 if __name__ == "__main__":
     app.run(debug=True)

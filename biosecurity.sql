@@ -50,13 +50,12 @@ ON UPDATE CASCADE
 );
 
 
-CREATE DATABASE `userlogin`;
-USE`userlogin`;
-CREATE TABLE `secureaccount` (
-  `userid` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(100) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `email` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`userid`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE IF NOT EXISTS`secureaccount` 
+(
+`userid` int NOT NULL AUTO_INCREMENT,
+`username` varchar(100) NOT NULL,
+`password` varchar(255) NOT NULL,
+`email` varchar(100) DEFAULT NULL,
+PRIMARY KEY (`userid`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
