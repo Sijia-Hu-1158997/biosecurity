@@ -1,4 +1,16 @@
-INSERT INTO apiarist (`first_name`, `last_name`, address, email, phone, `date_joined`, status) VALUES ('Tom', 'Smith','24 Main St, Karori, Wellington, New Zealand 5011','johnsmith@google.nz', '0211234231','2022-04-02','active');
+INSERT INTO secureaccount (username, password, email) VALUES
+('johnsmith', 'password123', 'johnsmith@google.nz'),
+('sarahwhite', 'password456', 'sarahwhite@hotmail.com.nz'),
+('marywang', 'password789', 'marywang@google.nz'),
+('loripye', 'passwordabc', 'loripye@gmail.com.nz'),
+('giogio', 'passwordxyz', 'giogio@giovana.com.nz');
+
+
+
+
+
+
+INSERT INTO apiarist (`first_name`, `last_name`, address, email, phone, `date_joined`, status) VALUES ('John', 'Smith','24 Main St, Karori, Wellington, New Zealand 5011','johnsmith@google.nz', '0211234231','2022-04-02','active');
 INSERT INTO apiarist (`first_name`, `last_name`, address, email, phone, `date_joined`, status) VALUES ('Sarah', 'White','2 Tawa Rd, Burnside, Christchurch, New Zealand 4021','sarahwhite@hotmail.com.nz', '0214567231','2020-04-02','active');
 INSERT INTO apiarist (`first_name`, `last_name`, address, email, phone, `date_joined`, status) VALUES ('Mary', 'Wang','3 Bevin St, NewMarket, Auckland, New Zealand 6022','marywang@google.nz', '0375234231','2023-06-07','active');
 INSERT INTO apiarist (`first_name`, `last_name`, address, email, phone, `date_joined`, status) VALUES ('Lori', 'Pye','11 Bidwill St, Mt Cook, Wellington, New Zealand 5067','loripye@gmail.com.nz', '0214284631','2021-08-05','active');
@@ -7,6 +19,8 @@ INSERT INTO staff (`first_name`, `last_name`, email, `work_phone_number`, `hire_
 INSERT INTO staff (`first_name`, `last_name`, email, `work_phone_number`, `hire_date`,`position`,`department`,`staff_status`) VALUES ('Kim', 'Wang','kimwang@123.com.nz', '0414567694','2009-04-10','Supporter', 'Customer Service Team','active');
 INSERT INTO staff (`first_name`, `last_name`, email, `work_phone_number`, `hire_date`,`position`,`department`,`staff_status`) VALUES ('Mythili', 'Scott','mythiliscott@hotmail.com', '0860694769','2021-12-30','Bee specialist', 'Consult Team','active');
 INSERT INTO staff (`first_name`, `last_name`, email, `work_phone_number`, `hire_date`,`position`,`department`,`staff_status`) VALUES ('William', 'Butler','williamb@outlook.com', '0473568044','2004-08-29','Supporter', 'Customer Service Team','active');
+
+
 
 INSERT INTO bee_pests_and_diseases (`bee_item_type`, `present_in_nz`, `common_name`, `scientific_name`) 
 VALUES ('disease', 'yes','American foulbrood', 'Paenibacillus larvae');

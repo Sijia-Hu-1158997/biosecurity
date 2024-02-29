@@ -61,10 +61,10 @@ def login():
             # If account exists in accounts table 
             # Create session data, we can access this data in other routes
                 session['loggedin'] = True
-                session['id'] = account[0]
+                session['userid'] = account[0]
                 session['username'] = account[1]
                 # Redirect to home page
-                return redirect(url_for('home'))
+                return redirect(url_for('profile'))
             else:
                 #password incorrect
                 msg = 'Incorrect password!'

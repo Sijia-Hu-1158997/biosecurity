@@ -67,6 +67,7 @@
 <table style="width:90%">
 <!-- code to display staff-->
 <tr>
+    <th>User ID</th>
     <th>Apiarist ID</th>
     <th>Apiarist Name</th>
     <th>Address</th>
@@ -78,12 +79,13 @@
     {% for apiarist in apiaristlist %}
         <tr>
             <td>{{ apiarist[0] }}</td>
-            <td>{{ apiarist[1] }} {{ apiarist[2] }}</td>
-            <td>{{ apiarist[3] }}</td>
+            <td>{{ apiarist[1] }}</td>
+            <td>{{ apiarist[2] }} {{ apiarist[3] }}</td>
             <td>{{ apiarist[4] }}</td>
             <td>{{ apiarist[5] }}</td>
             <td>{{ apiarist[6] }}</td>
             <td>{{ apiarist[7] }}</td>
+            <td>{{ apiarist[8] }}</td>
         </tr>
     {% endfor %}
 </table>

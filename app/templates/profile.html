@@ -53,8 +53,6 @@
           <br>
           <ul>
             <li><a href="{{ url_for('home') }}">Home</a></li>
-            <li><a href="{{ url_for('list_apiarist') }}">Manage Apiarist</a></li>
-            <li><a href="{{ url_for('staff_list') }}">Manage Staff</a></li>
 
           </ul>
         </nav>
@@ -62,33 +60,27 @@
 
 <body style="background-color:#fcf2ea;">
 
-<h3>Staff List</h3>
+<h3>My Account</h3>
 
 
 <table style="width:90%">
 <!-- code to display staff-->
 <tr>
     <th>User ID</th>
-    <th>Staff Number</th>
-    <th>Staff Name</th>
+    <th>User Name</th>
+    <th>Password</th>
     <th>Email</th>
-    <th>Work Phone Number</th>
     <th>Hire Date</th>
     <th>Position</th>
     <th>Department</th>
     <th>Staff Status</th>
 </tr>
-    {% for staff in stafflist %}
+    {% for a in account %}
         <tr>
-            <td>{{ staff[0] }}</td>
-            <td>{{ staff[1] }}</td>
-            <td>{{ staff[2] }} {{ staff[3] }}</td>
-            <td>{{ staff[4] }}</td>
-            <td>{{ staff[5] }}</td>
-            <td>{{ staff[6] }}</td>
-            <td>{{ staff[7] }}</td>
-            <td>{{ staff[8] }}</td>
-            <td>{{ staff[9] }}</td>
+            <td>{{ a[0] }}</td>
+            <td>{{ a[1] }}</td>
+            <td>{{ a[2] }}</td>
+            <td>{{ a[3] }}</td>
         </tr>
     {% endfor %}
 </table>
