@@ -44,8 +44,7 @@ bee_id INT NOT NULL,
 characteristics varchar(500) NOT NULL,
 biology varchar(500) NOT NULL,
 symptoms varchar(500) NOT NULL,
-FOREIGN KEY (bee_id) REFERENCES bee_pests_and_diseases(bee_id) ON DELETE CASCADE ON UPDATE CASCADE 
-ON UPDATE CASCADE
+FOREIGN KEY (bee_id) REFERENCES bee_pests_and_diseases(bee_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
