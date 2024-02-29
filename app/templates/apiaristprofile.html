@@ -42,13 +42,6 @@
       li a:hover {
         background-color: #ec9239;
       }
-      
-      body {
-        background-image: url('/static/Images/bee.jpeg');
-        background-repeat: no-repeat;
-        background-attachment: fixed; 
-        background-size: 100% 100%;
-      }
     </style>
   
 </head>
@@ -57,52 +50,69 @@
     <nav>
           <h1>Biosecurity</h1>
           <p>Welcome to Biosecurity!</p>
-
           <ul>
             <li><a href="{{ url_for('home') }}">Home</a></li>
-            <li><a href="{{ url_for('register') }}">Register</a></li>
-            <li><a href="{{ url_for('login') }}">Login</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
 
           </ul>
         </nav>
 </body>
 
+<body style="background-color:#fcf2ea;">
 
-<head>
-    <title>Register</title>
-</head>
+<br><br>
 
-<body>
-    <div class="register">
-        <h1>Register</h1>
-        <div class="links">
-            <a href="{{ url_for('register') }}" class="active">Register</a>
-        </div>
-        <form action="{{ url_for('register') }}" method="post" autocomplete="off">
-            <label for="username">
-                <i class="fas fa-user"></i>
-            </label>
-           
-            <input type="text" name="username" placeholder="Username" id="username" required>
-            <label for="password">
-                <i class="fas fa-lock"></i>
-            </label>
-            
-            <input type="password" name="password" placeholder="Password" id="password" required>
-            <label for="email">
-                <i class="fas fa-envelope"></i>
-            </label>
-           
-            <input type="email" name="email" placeholder="Email" id="email" required>
-            <div class="msg">{{ msg }}</div>
-            <input type="submit" value="Register">
+<h3>My Account Information</h3>
 
-        </form>
-    </div>
+<table>
+  <tr>
+      <td>User ID:</td>
+      <td>{{ accountinfor[0] }}</td>
+  </tr>
+  <tr>
+      <td>User Name:</td>
+      <td>{{ accountinfor[1] }}</td>
+  </tr>
+  <tr>
+      <td>Password:</td>
+      <td>{{ accountinfor[2] }}</td>
+  </tr>
+  <tr>
+      <td>Login Email:</td>
+      <td>{{ accountinfor[3] }}</td>
+  </tr>
+</table>
+
+
+<br><br>
+
+<h3>My Profile</h3>
+<table>
+  <tr>
+      <td>My Name:</td>
+      <td>{{ apiaristinfor[0] }}{{ apiaristinfor[1] }}</td>
+  </tr>
+  <tr>
+      <td>My Address:</td>
+      <td>{{ apiaristinfor[2] }}</td>
+  </tr>
+  <tr>
+      <td>Email:</td>
+      <td>{{ apiaristinfor[3] }}</td>
+  </tr>
+  <tr>
+      <td>Contact Number:</td>
+      <td>{{ apiaristinfor[4] }}</td>
+  </tr>
+  <tr>
+      <td>Joined Date:</td>
+      <td>{{ apiaristinfor[5] }}</td>
+  </tr>
+</table>
+
+<br><br>
+
 </body>
-
-
-
 
 
 </html>

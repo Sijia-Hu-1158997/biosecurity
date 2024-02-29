@@ -1,8 +1,10 @@
 from app import app
+from flask import Flask
 from flask import render_template
 from flask import request
 from flask import redirect
 from flask import url_for
+from flask import session
 import mysql.connector
 from mysql.connector import FieldType
 import connect
@@ -19,10 +21,7 @@ def getCursor():
     dbconn = connection.cursor()
     return dbconn
 
-@app.route("/staff")
-def staff():
 
-    return "staff profile"
 
 
 
@@ -52,3 +51,20 @@ def manage_apiarist():
             # Redirect to the customer list or any other page you prefer
             return redirect("/manage/apiarist")
     return render_template("home.html")
+
+
+
+
+
+
+@app.route('/logout')
+def logout():
+    # Remove session data, this will log the user out
+   session.pop('loggedin', None)
+   session.pop('id', None)
+   session.pop('username', None)
+   # Redirect to login page
+   return redirect(url_for('login'))
+
+
+

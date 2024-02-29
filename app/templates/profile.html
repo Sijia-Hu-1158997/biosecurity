@@ -50,9 +50,9 @@
     <nav>
           <h1>Biosecurity</h1>
           <p>Welcome to Biosecurity!</p>
-          <br>
           <ul>
             <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
 
           </ul>
         </nav>
@@ -60,30 +60,61 @@
 
 <body style="background-color:#fcf2ea;">
 
-<h3>My Account</h3>
+<br><br>
 
+<h3>My Account Information</h3>
 
-<table style="width:90%">
-<!-- code to display staff-->
-<tr>
-    <th>User ID</th>
-    <th>User Name</th>
-    <th>Password</th>
-    <th>Email</th>
-    <th>Hire Date</th>
-    <th>Position</th>
-    <th>Department</th>
-    <th>Staff Status</th>
-</tr>
-    {% for a in account %}
-        <tr>
-            <td>{{ a[0] }}</td>
-            <td>{{ a[1] }}</td>
-            <td>{{ a[2] }}</td>
-            <td>{{ a[3] }}</td>
-        </tr>
-    {% endfor %}
+<table>
+  <tr>
+      <td>User ID:</td>
+      <td>{{ accountinfor[0] }}</td>
+  </tr>
+  <tr>
+      <td>User Name:</td>
+      <td>{{ accountinfor[1] }}</td>
+  </tr>
+  <tr>
+      <td>Password:</td>
+      <td>{{ accountinfor[2] }}</td>
+  </tr>
+  <tr>
+      <td>Login Email:</td>
+      <td>{{ accountinfor[3] }}</td>
+  </tr>
 </table>
+
+
+<br><br>
+
+<h3>My Profile</h3>
+<table>
+  <tr>
+      <td>My Name:</td>
+      <td>{{ staffinfor[0] }}{{ staffinfor[1] }}</td>
+  </tr>
+  <tr>
+      <td>My Contact Email:</td>
+      <td>{{ staffinfor[2] }}</td>
+  </tr>
+  <tr>
+      <td>Work Phone Number:</td>
+      <td>{{ staffinfor[3] }}</td>
+  </tr>
+  <tr>
+      <td>Joined Date:</td>
+      <td>{{ staffinfor[4] }}</td>
+  </tr>
+  <tr>
+      <td>Department:</td>
+      <td>{{ staffinfor[5] }}</td>
+  </tr>
+  <tr>
+      <td>Position:</td>
+      <td>{{ staffinfor[6] }}</td>
+  </tr>
+</table>
+
+<br><br>
 
 </body>
 

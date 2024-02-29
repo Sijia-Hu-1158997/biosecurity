@@ -1,4 +1,5 @@
 from app import app
+from flask import Flask
 from flask import render_template
 import mysql.connector
 from mysql.connector import FieldType

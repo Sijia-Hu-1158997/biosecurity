@@ -11,7 +11,10 @@ from mysql.connector import FieldType
 import connect
 from flask_hashing import Hashing
 
+
+
 app = Flask(__name__)
+app.secret_key = 'abcd'
 
 from app import adminview
 from app import staffview
@@ -111,24 +114,35 @@ def register():
     # Show registration form with message (if any)
     return render_template('register.html', msg=msg)
 
+
+
 @app.route('/profile')
 def profile():
     # Check if user is loggedin
     if 'loggedin' in session:
         # We need all the account info for the user so we can display it on the profile page
         cursor = getCursor()
-        cursor.execute('SELECT * FROM secureaccount WHERE id = %s', (session['id'],))
-        account = cursor.fetchone()
-        # Show the profile page with account info
-        return render_template('profile.html', account=account)
-    # User is not loggedin redirect to login page
+        cursor.execute('SELECT userid, username, password, email FROM secureaccount WHERE userid = %s', (session['userid'],))
+        accountinfor = cursor.fetchone()
+
+        cursor.execute('SELECT first_name, last_name, email, work_phone_number, hire_date, position, department FROM biosecurity.staff WHERE userid = %s', (session['userid'],))
+        staffinfor = cursor.fetchone()
+
+        # Check if the user is a staff member
+        if staffinfor:
+            # Show the staff profile page
+            return render_template('profile.html', accountinfor=accountinfor, staffinfor=staffinfor)
+        
+        # If not a staff member, continue to check if the user is an apiarist
+        cursor.execute('SELECT first_name, last_name, address, email, phone, date_joined FROM biosecurity.apiarist WHERE userid = %s', (session['userid'],))
+        apiaristinfor = cursor.fetchone()
+
+        # Check if the user is an apiarist
+        if apiaristinfor:
+            # Show the apiarist profile page
+            return render_template('apiaristprofile.html', accountinfor=accountinfor, apiaristinfor=apiaristinfor)
+
+    # User is not logged in or not recognized as staff or apiarist; redirect to login page
     return redirect(url_for('login'))
 
-@app.route('/logout')
-def logout():
-    # Remove session data, this will log the user out
-   session.pop('loggedin', None)
-   session.pop('id', None)
-   session.pop('username', None)
-   # Redirect to login page
-   return redirect(url_for('login'))
+
