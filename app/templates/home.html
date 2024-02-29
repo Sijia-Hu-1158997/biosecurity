@@ -22,7 +22,7 @@
         list-style-type: none;
         margin: 0;
         padding: 0;
-        width: 800px;
+        width: 100%;
         overflow: hidden;
         background-color: #e57a22;
       }
@@ -39,9 +39,15 @@
         text-decoration: none;
       }
         
-      li a:hover {
-        background-color: #ec9239;
+      li a:hover {background-color: #ec9239;}
+
+      body {
+        background-image: url('/static/Images/bee.jpeg');
+        background-repeat: no-repeat;
+        background-attachment: fixed; 
+        background-size: 100% 100%;
       }
+
     </style>
     
     
@@ -55,9 +61,12 @@
             <br>
             <ul>
               <li><a href="{{ url_for('home') }}">Home</a></li>
+              <li><a href="{{ url_for('register') }}">Register</a></li>
+              <li><a href="{{ url_for('login') }}">Login</a></li>
 
             </ul>
           </nav>
+
 
 
         <!-- Bootstrap's JavaScript bundle including Popper -->

@@ -1,5 +1,75 @@
-{% extends "home.html" %}
-{% block content %}
+<!DOCTYPE html>
+<html>
+    <head>
+      
+      <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+        
+        <meta charset="utf-8" />
+        <title>{% block title %}Biosecurity{% endblock %}</title>
+        <!-- Bootstrap CSS link -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    <style>
+      table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+      th, td {
+        padding: 15px;
+      }
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        overflow: hidden;
+        background-color: #e57a22;
+      }
+        
+      li {
+        float: left;
+      }
+        
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 16px;
+        text-decoration: none;
+      }
+        
+      li a:hover {
+        background-color: #ec9239;
+      }
+
+      body {
+        background-image: url('/static/Images/bee.jpeg');
+        background-repeat: no-repeat;
+        background-attachment: fixed; 
+        background-size: 100% 100%;
+      }
+
+
+
+    </style>
+  
+</head>
+
+<body>
+    <nav>
+          <h1>Biosecurity</h1>
+          <p>Welcome to Biosecurity!</p>
+          <br>
+          <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('register') }}">Register</a></li>
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+
+          </ul>
+        </nav>
+</body>
+
 
 <head>
     <title>Login</title>
@@ -28,4 +98,4 @@
 </body>
 
 
-{% endblock %}
+</html>

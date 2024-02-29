@@ -36,7 +36,7 @@ def admin_profile():
 @app.route("/liststaff")
 def staff_list():
     cursor = getCursor()
-    cursor.execute("SELECT * FROM staff order by last_name, first_name asc")
+    cursor.execute("SELECT * FROM staff order by staff_number")
     staffresult = cursor.fetchall()
 
     return render_template("managestaff.html", stafflist = staffresult)
