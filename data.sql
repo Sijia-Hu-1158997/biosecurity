@@ -11,7 +11,7 @@ INSERT INTO staff (`first_name`, `last_name`, email, `work_phone_number`, `hire_
 INSERT INTO bee_pests_and_diseases (`bee_item_type`, `present_in_nz`, `common_name`, `scientific_name`) 
 VALUES ('disease', 'yes','American foulbrood', 'Paenibacillus larvae');
 
-INSERT INTO bee_infor (bee_id, `characteristics`, `biology`, `symptoms`, `images`)
+INSERT INTO bee_infor (bee_id, `characteristics`, `biology`, `symptoms`)
 VALUES (
     1,
     'Paenibacillus larvae is a rod-shaped bacterium visible only under a high power microscope. 
@@ -20,15 +20,14 @@ VALUES (
     'AFB is caused when young larvae are fed spores of the bacterium, which then germinate and multiply rapidly in the tissues of the larvae, generating billions of new spores. Death then typically happens at the pupal stage. ',
     'Symptoms can include cell cappings that are sunken, perforated, darkened, or 
     greasy-looking, as well as irregular brood pattern in advanced infections. 
-    Look closely, as early infections may only have one or two cells showing symptoms.',
-    LOAD_FILE('iCloud Drive/Documents/GitHub/biosecurity/images/AFB.jepg')
+    Look closely, as early infections may only have one or two cells showing symptoms.'
 );
 
 
 INSERT INTO bee_pests_and_diseases (`bee_item_type`, `present_in_nz`, `common_name`, `scientific_name`) 
 VALUES ('pest', 'yes','Varroa mites', 'Varroa destructor');
 
-INSERT INTO bee_infor (bee_id, `characteristics`, `biology`, `symptoms`, `images`)
+INSERT INTO bee_infor (bee_id, `characteristics`, `biology`, `symptoms`)
 VALUES (
     2,
     'Varroa mites are one of the most problematic pests of honey bees
@@ -41,14 +40,13 @@ VALUES (
     'Female varroa mites can be seen throughout a hive both on adult
     honey bees as well as developing larvae and pupae. Female mites
     are oval shaped, reddish to dark brown in colour, and measure up to
-    2 mm across. ',
-    LOAD_FILE('iCloud Drive/Documents/GitHub/biosecurity/images/Varroa mites.jepg')
+    2 mm across. '
 );
 
 INSERT INTO bee_pests_and_diseases (`bee_item_type`, `present_in_nz`, `common_name`, `scientific_name`) 
 VALUES ('disease', 'yes','Nosema', 'Nosemosis');
 
-INSERT INTO bee_infor (bee_id, `characteristics`, `biology`, `symptoms`, `images`)
+INSERT INTO bee_infor (bee_id, `characteristics`, `biology`, `symptoms`)
 VALUES (
     3,
     'They are completely oval with a dark edge. Their contents, consisting of nucleus, sporoplasm and polar tube, cannot be seen.',
@@ -59,14 +57,13 @@ VALUES (
     more apparent when nutrition is poor and weather conditions are
     cold and wet. Sometimes, dysentery is observed, the lifespan of
     bees are reduced and the colony dwindles in late winter or early
-    spring  ',
-    LOAD_FILE('iCloud Drive/Documents/GitHub/biosecurity/images/Nosema.jepg')
+    spring  '
 );
 
 INSERT INTO bee_pests_and_diseases (`bee_item_type`, `present_in_nz`, `common_name`, `scientific_name`) 
 VALUES ('disease', 'yes','Chalkbrood Disease', 'Ascosphaera apis');
 
-INSERT INTO bee_infor (bee_id, `characteristics`, `biology`, `symptoms`, `images`)
+INSERT INTO bee_infor (bee_id, `characteristics`, `biology`, `symptoms`)
 VALUES (
     4,
     'It causes the chalkbrood diseases in bees, which rarely kills infected colonies but can weaken them and lead to reduced honey yields[4] and susceptibility to other pests and diseases.',
@@ -75,15 +72,14 @@ VALUES (
     'In infected colonies some larvae are covered by white fungus. This
     gives them a “chalky” and whiter appearance than that of healthy
     larvae. The brood may appear scattered with cell caps of dead
-    larvae containing small holes and slightly flattened. ',
-    LOAD_FILE('iCloud Drive/Documents/GitHub/biosecurity/images/Chalkbrood Disease.jepg')
+    larvae containing small holes and slightly flattened. '
 );
 
 
 INSERT INTO bee_pests_and_diseases (`bee_item_type`, `present_in_nz`, `common_name`, `scientific_name`) 
 VALUES ('disease', 'yes','Sacbrood', 'Sacbrood virus');
 
-INSERT INTO bee_infor (bee_id, `characteristics`, `biology`, `symptoms`, `images`)
+INSERT INTO bee_infor (bee_id, `characteristics`, `biology`, `symptoms`)
 VALUES (
     5,
     'Sacbrood is a disease caused by the sacbrood virus. It can prevent
@@ -102,15 +98,14 @@ VALUES (
     shortly after capping, before they pupate. The larvae change from
     white, to yellow, and then brown. Larvae usually die in the cells
     with their heads facing up—the head and mouthparts usually turn
-    black. ',
-    LOAD_FILE('iCloud Drive/Documents/GitHub/biosecurity/images/Sacbrood.jpeg')
+    black. '
 );
 
 
 INSERT INTO bee_pests_and_diseases (`bee_item_type`, `present_in_nz`, `common_name`, `scientific_name`) 
 VALUES ('disease', 'yes','Deformed wing virus', ' Iflaviridae');
 
-INSERT INTO bee_infor (bee_id, `characteristics`, `biology`, `symptoms`, `images`)
+INSERT INTO bee_infor (bee_id, `characteristics`, `biology`, `symptoms`)
 VALUES (
     6,
     'Deformed wing virus is named after one of the main symptoms it
@@ -125,15 +120,14 @@ VALUES (
     virus A (DWV-A) subtype.',
     'The deformed wings of adult bees are easily observed and are
     unique to this viral infection. Other symptoms caused by Deformed
-    wing virus are not easily observed.',
-    LOAD_FILE('iCloud Drive/Documents/GitHub/biosecurity/images/DWV.jepg')
+    wing virus are not easily observed.'
 );
 
 
 INSERT INTO bee_pests_and_diseases (`bee_item_type`, `present_in_nz`, `common_name`, `scientific_name`) 
 VALUES ('disease', 'yes','Black queen cell virus', 'Dicistroviridae');
 
-INSERT INTO bee_infor (bee_id, `characteristics`, `biology`, `symptoms`, `images`)
+INSERT INTO bee_infor (bee_id, `characteristics`, `biology`, `symptoms`)
 VALUES (
     7,
     'The black queen cell virus (BQCV) is a virus that infects honey bees, specifically Apis mellifera, Apis florea, and Apis dorsata.[1] Infection of the latter two species is more recent and can be attributed to genetic similarity and geographical closeness.',
@@ -141,15 +135,14 @@ VALUES (
     'Queen bee pupae turn yellow
     and the skin of the pupae to become sac-like.
     At later stages, the dead queen bee changes to
-    brown-black.',
-    LOAD_FILE('iCloud Drive/Documents/GitHub/biosecurity/images/Black queen cell virus.jepg')
+    brown-black.'
 );
 
 
 INSERT INTO bee_pests_and_diseases (`bee_item_type`, `present_in_nz`, `common_name`, `scientific_name`) 
 VALUES ('pest', 'yes','Wax Moth', 'Achroia grisella and Galleria mellonella ');
 
-INSERT INTO bee_infor (bee_id, `characteristics`, `biology`, `symptoms`, `images`)
+INSERT INTO bee_infor (bee_id, `characteristics`, `biology`, `symptoms`)
 VALUES (
     8,
     'There are two species of wax moth, the Greater wax moth (Galleria mellonella) and the Lesser wax moth (Achroia grisella). Both species eat beeswax, particularly unprocessed wax, pollen, remains of larval honey bees, honey bee cocoon silk and enclosed honey bee faeces found on walls of brood cells.',
@@ -157,38 +150,35 @@ VALUES (
     'Wax moth are small and grey
     (10-19 mm long). Larvae have dark heads with
     several body segments. They create white, yellow
-    and/or dark brown cocoons.',
-    LOAD_FILE('iCloud Drive/Documents/GitHub/biosecurity/images/Wax Moth.jepg')
+    and/or dark brown cocoons.'
 );
 
 
 
 INSERT INTO bee_pests_and_diseases (`bee_item_type`, `present_in_nz`, `common_name`, `scientific_name`) 
-VALUES ('pest', 'yes','Vespula Wasps', 'Vespa germanica (German wasp) and Vespa vulgaris (common wasp) ');
+VALUES ('pest', 'yes','Vespula Wasps', 'Vespula vulgaris');
 
-INSERT INTO bee_infor (bee_id, `characteristics`, `biology`, `symptoms`, `images`)
+INSERT INTO bee_infor (bee_id, `characteristics`, `biology`, `symptoms`)
 VALUES (
     9,
-    '....',
-    '...',
+    'Vespula vulgaris is a eusocial vespid that builds its tan paper nest in or on a structure capable of supporting it. A founding queen searches for a hollow tree, wall cavity, rock crevice, or even a hole made by other animals to build a nest. One colony cycle lasts for about 6–11 months and each colony cycle produces around 3,000–8,000 larvae.',
+    'German and common wasps (Vespula species) are social wasps that, since being introduced into New Zealand have spread throughout the country and during the "wasp season" there numbers are so high that they are a pest of urban, rural, and natural ecosystems.',
     'German and common wasps look very similar.
     They have spread throughout most of the country and are a
-    significant pest of urban, rural, and native ecosystems.',
-    LOAD_FILE('iCloud Drive/Documents/GitHub/biosecurity/images/....jepg')
+    significant pest of urban, rural, and native ecosystems.'
 );
 
 
 INSERT INTO bee_pests_and_diseases (`bee_item_type`, `present_in_nz`, `common_name`, `scientific_name`) 
 VALUES ('disease', 'yes','Parasitic Mite Syndrome (PMS)', 'Parasitic Mite Syndrome (PMS)');
 
-INSERT INTO bee_infor (bee_id, `characteristics`, `biology`, `symptoms`, `images`)
+INSERT INTO bee_infor (bee_id, `characteristics`, `biology`, `symptoms`)
 VALUES (
     10,
-    '...',
-    '....',
-    'spotty brood pattern, lack of
+    'PMS or Parasitic Mite Syndrome is a condition that causes a honey bee colony to deteriorate and eventually dwindle away and die.',
+    'There has not yet been a pathogen detected which causes the brood symptoms that appear with this syndrome. However there are always varroa mites present with this syndrome.',
+    'Spotty brood pattern, lack of
     adult population, high mite infestation, larvae do
     not rope, and/or larvae are slumped and possibly
-    discoloured.',
-    LOAD_FILE('iCloud Drive/Documents/GitHub/biosecurity/images/....jepg')
+    discoloured.'
 );

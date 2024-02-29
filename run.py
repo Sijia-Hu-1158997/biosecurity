@@ -1,4 +1,4 @@
-from folder import app
+from app import app
 
 from flask import render_template
 from flask import request
@@ -34,28 +34,9 @@ def getCursor():
     dbconn = connection.cursor()
     return dbconn
 
-@app.route("/")
-@app.route("/home")
-def home():
-    return render_template("home.html")
 
 
-@app.route("/liststaff")
-def liststaff():
-    cursor = getCursor()
-    cursor.execute("SELECT * FROM staff")
-    staffresult = cursor.fetchall()
 
-    cursor.execute("SELECT * FROM apiarist")
-    apiaristresult = cursor.fetchall()
-
-    return render_template("stafflist.html", stafflist = staffresult,apiaristlist = apiaristresult)
-
-@app.route("/listapiarist")
-def listapiarist():
-    cursor = getCursor()
-    cursor.execute("SELECT * FROM apiarist")
-    return render_template("home.html")
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
