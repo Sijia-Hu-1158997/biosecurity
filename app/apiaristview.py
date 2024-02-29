@@ -25,9 +25,22 @@ def getCursor():
     dbconn = connection.cursor()
     return dbconn
 
-@app.route("/apiarist")
-def apiarist():
 
-    return "apiarist profile"
+@app.route('/apiarist_profile')
+def apiarist_profile():
+    if 'loggedin' in session:
+        if session['user_type'] == 'apiarist':
+            cursor = getCursor()
 
+            cursor.execute('SELECT userid, username, password, email FROM secureaccount WHERE userid = %s', (session['userid'],))
+            accountinfor = cursor.fetchone()
+            
+            cursor.execute('SELECT first_name, last_name, address, email, phone, date_joined FROM biosecurity.apiarist WHERE userid = %s', (session['userid'],))
+            apiaristinfor = cursor.fetchone()
+
+            return render_template('apiaristprofile.html', accountinfor=accountinfor, apiaristinfor=apiaristinfor)
+        else:
+            return "Illegal Access" 
+    else:
+        return redirect(url_for('login'))
 

@@ -1,13 +1,13 @@
 from app import app
 from flask import Flask
 from flask import render_template
-import mysql.connector
-from mysql.connector import FieldType
-import connect
 from flask import request
 from flask import redirect
 from flask import url_for
-
+from flask import session
+import mysql.connector
+from mysql.connector import FieldType
+import connect
 
 dbconn = None
 connection = None
@@ -21,17 +21,24 @@ def getCursor():
     dbconn = connection.cursor()
     return dbconn
 
-@app.route("/admin")
-@app.route("/admin/dashboard")
-def admin_dashboard():
-
-    return "admin dashboard"
-
-
-@app.route("/admin/profile")
+@app.route('/admin_profile')
 def admin_profile():
+    if 'loggedin' in session:
+        if session['user_type'] == 'admin':
+            cursor = getCursor()
+            
+            cursor.execute('SELECT userid, username, password, email FROM secureaccount WHERE userid = %s', (session['userid'],))
+            accountinfor = cursor.fetchone()
 
-    return "admin profile"
+            cursor.execute('SELECT first_name, last_name, email, work_phone_number, hire_date, position, department FROM biosecurity.staff WHERE userid = %s', (session['userid'],))
+            staffinfor = cursor.fetchone()
+
+            return render_template('admin.html', accountinfor=accountinfor, staffinfor=staffinfor)
+        else:
+            return "Illegal Access" 
+    else:
+        return redirect(url_for('login'))
+
 
 
 @app.route("/liststaff")

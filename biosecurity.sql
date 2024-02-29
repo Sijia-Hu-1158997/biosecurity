@@ -8,8 +8,10 @@ CREATE TABLE IF NOT EXISTS`secureaccount`
 `username` varchar(100) NOT NULL,
 `password` varchar(255) NOT NULL,
 `email` varchar(100) DEFAULT NULL,
+`user_type` ENUM('staff', 'apiarist', 'admin') NOT NULL DEFAULT 'apiarist';
 PRIMARY KEY (`userid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 
 CREATE TABLE IF NOT EXISTS apiarist

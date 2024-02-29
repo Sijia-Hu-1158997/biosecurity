@@ -66,8 +66,14 @@ def login():
                 session['loggedin'] = True
                 session['userid'] = account[0]
                 session['username'] = account[1]
-                # Redirect to home page
-                return redirect(url_for('profile'))
+                session['user_type'] = account[4]
+                # Redirect 
+                if account[4] == 'staff':
+                    return redirect(url_for('staff_profile'))
+                elif account[4] == 'apiarist':
+                    return redirect(url_for('apiarist_profile'))
+                elif account[4] == 'admin':
+                    return redirect(url_for('admin_profile'))
             else:
                 #password incorrect
                 msg = 'Incorrect password!'
@@ -76,6 +82,7 @@ def login():
             msg = 'Incorrect username'
     # Show the login form with message (if any)
     return render_template('index.html', msg=msg)
+
 
 
 
@@ -116,33 +123,18 @@ def register():
 
 
 
-@app.route('/profile')
-def profile():
-    # Check if user is loggedin
-    if 'loggedin' in session:
-        # We need all the account info for the user so we can display it on the profile page
-        cursor = getCursor()
-        cursor.execute('SELECT userid, username, password, email FROM secureaccount WHERE userid = %s', (session['userid'],))
-        accountinfor = cursor.fetchone()
 
-        cursor.execute('SELECT first_name, last_name, email, work_phone_number, hire_date, position, department FROM biosecurity.staff WHERE userid = %s', (session['userid'],))
-        staffinfor = cursor.fetchone()
+@app.route('/logout')
+def logout():
+    # Remove session data, this will log the user out
+   session.pop('loggedin', None)
+   session.pop('id', None)
+   session.pop('username', None)
+   # Redirect to login page
+   return redirect(url_for('login'))
 
-        # Check if the user is a staff member
-        if staffinfor:
-            # Show the staff profile page
-            return render_template('profile.html', accountinfor=accountinfor, staffinfor=staffinfor)
-        
-        # If not a staff member, continue to check if the user is an apiarist
-        cursor.execute('SELECT first_name, last_name, address, email, phone, date_joined FROM biosecurity.apiarist WHERE userid = %s', (session['userid'],))
-        apiaristinfor = cursor.fetchone()
 
-        # Check if the user is an apiarist
-        if apiaristinfor:
-            # Show the apiarist profile page
-            return render_template('apiaristprofile.html', accountinfor=accountinfor, apiaristinfor=apiaristinfor)
 
-    # User is not logged in or not recognized as staff or apiarist; redirect to login page
-    return redirect(url_for('login'))
+
 
 

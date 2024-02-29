@@ -1,13 +1,13 @@
-INSERT INTO secureaccount (username, password, email) VALUES
-('johnsmith', 'password123', 'johnsmith@google.nz'),
-('sarahwhite', 'password456', 'sarahwhite@hotmail.com.nz'),
-('marywang', 'password789', 'marywang@google.nz'),
-('loripye', 'passwordabc', 'loripye@gmail.com.nz'),
-('giogio', 'passwordxyz', 'giogio@giovana.com.nz');
-
-
-
-
+INSERT INTO secureaccount (username, password, email, user_type) VALUES
+('rosemaryevans', 'securepassword1', 'rosemaryevans@123.com', 'admin'),
+('kimwang', 'securepassword2', 'kimwang@123.com.nz', 'staff'),
+('mythiliscott', 'securepassword3', 'mythiliscott@hotmail.com', 'staff'),
+('williambutler', 'securepassword4', 'williamb@outlook.com', 'staff');
+('johnsmith', 'password123', 'johnsmith@google.nz','apiarist'),
+('sarahwhite', 'password456', 'sarahwhite@hotmail.com.nz', 'apiarist'),
+('marywang', 'password789', 'marywang@google.nz', 'apiarist'),
+('loripye', 'passwordabc', 'loripye@gmail.com.nz', 'apiarist'),
+('giogio', 'passwordxyz', 'giogio@giovana.com.nz', 'apiarist');
 
 
 INSERT INTO apiarist (`first_name`, `last_name`, address, email, phone, `date_joined`, status) VALUES ('John', 'Smith','24 Main St, Karori, Wellington, New Zealand 5011','johnsmith@google.nz', '0211234231','2022-04-02','active');

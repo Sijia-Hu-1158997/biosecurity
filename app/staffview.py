@@ -22,6 +22,23 @@ def getCursor():
     return dbconn
 
 
+@app.route('/staff_profile')
+def staff_profile():
+    if 'loggedin' in session:
+        if session['user_type'] == 'staff':
+            cursor = getCursor()
+            
+            cursor.execute('SELECT userid, username, password, email FROM secureaccount WHERE userid = %s', (session['userid'],))
+            accountinfor = cursor.fetchone()
+
+            cursor.execute('SELECT first_name, last_name, email, work_phone_number, hire_date, position, department FROM biosecurity.staff WHERE userid = %s', (session['userid'],))
+            staffinfor = cursor.fetchone()
+            
+            return render_template('profile.html', accountinfor=accountinfor, staffinfor=staffinfor)
+        else:
+            return "Illegal Access" 
+    else:
+        return redirect(url_for('login'))   
 
 
 
@@ -57,14 +74,6 @@ def manage_apiarist():
 
 
 
-@app.route('/logout')
-def logout():
-    # Remove session data, this will log the user out
-   session.pop('loggedin', None)
-   session.pop('id', None)
-   session.pop('username', None)
-   # Redirect to login page
-   return redirect(url_for('login'))
 
 
 
