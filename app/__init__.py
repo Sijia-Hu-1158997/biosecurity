@@ -98,7 +98,13 @@ def register():
         username = request.form['username']
         password = request.form['password']
         email = request.form['email']
+        firstname = request.form['apiarist_first_name']
+        lastname = request.form['apiarist_last_name']
+        address = request.form['address']
+        contactemail = request.form['apiarist_email']
+        phone = request.form['phone']
         username = username.lower()
+        current_date = datetime.now().date()
         # Check if account exists using MySQL
         cursor = getCursor()
         cursor.execute('SELECT * FROM secureaccount WHERE username = %s', (username,))
@@ -108,16 +114,19 @@ def register():
             msg = 'Account already exists!'
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
             msg = 'Invalid email address!'
+        elif not re.match(r'[^@]+@[^@]+\.[^@]+', contactemail):
+            msg = 'Invalid email address!'
         elif len(password) < 8 or not any(char.isdigit() for char in password) or not any(char.isalpha() for char in password):
             msg = 'Password must be at least 8 characters long and contain a mix of letters and numbers.'
         elif not re.match(r'[A-Za-z0-9]+', username):
             msg = 'Username must contain only characters and numbers!'
-        elif not username or not password or not email:
+        elif not username or not password or not email or not firstname or not lastname or not address or not contactemail or not phone:
             msg = 'Please fill out the form!'
         else:
             # Account doesnt exists and the form data is valid, now insert new account into accounts table
             hashed = hashing.hash_value(password, salt='abcd')
             cursor.execute('INSERT INTO secureaccount (username, password, email) VALUES (%s, %s, %s)', (username, hashed, email,))
+            cursor.execute('INSERT INTO apiarist (first_name, last_name, email, phone, date_joined) VALUES (%s, %s, %s, %s, %s)', (firstname, lastname, contactemail, phone, current_date,))
             connection.commit()
             msg = 'You have successfully registered!'
     elif request.method == 'POST':
