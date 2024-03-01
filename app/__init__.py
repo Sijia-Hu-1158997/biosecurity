@@ -53,6 +53,8 @@ def login():
         # Create variables for easy access
         username = request.form['username']
         user_password = request.form['password']
+    
+        username = username.lower()
         # Check if account exists using MySQL
         cursor = getCursor()
         cursor.execute('SELECT * FROM secureaccount WHERE username = %s', (username,))
@@ -96,6 +98,7 @@ def register():
         username = request.form['username']
         password = request.form['password']
         email = request.form['email']
+        username = username.lower()
         # Check if account exists using MySQL
         cursor = getCursor()
         cursor.execute('SELECT * FROM secureaccount WHERE username = %s', (username,))
@@ -105,6 +108,8 @@ def register():
             msg = 'Account already exists!'
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
             msg = 'Invalid email address!'
+        elif len(password) < 8 or not any(char.isdigit() for char in password) or not any(char.isalpha() for char in password):
+            msg = 'Password must be at least 8 characters long and contain a mix of letters and numbers.'
         elif not re.match(r'[A-Za-z0-9]+', username):
             msg = 'Username must contain only characters and numbers!'
         elif not username or not password or not email:
@@ -112,7 +117,7 @@ def register():
         else:
             # Account doesnt exists and the form data is valid, now insert new account into accounts table
             hashed = hashing.hash_value(password, salt='abcd')
-            cursor.execute('INSERT INTO secureaccount VALUES (NULL, %s, %s, %s)', (username, hashed, email,))
+            cursor.execute('INSERT INTO secureaccount (username, password, email) VALUES (%s, %s, %s)', (username, hashed, email,))
             connection.commit()
             msg = 'You have successfully registered!'
     elif request.method == 'POST':
@@ -120,7 +125,6 @@ def register():
         msg = 'Please fill out the form!'
     # Show registration form with message (if any)
     return render_template('register.html', msg=msg)
-
 
 
 
