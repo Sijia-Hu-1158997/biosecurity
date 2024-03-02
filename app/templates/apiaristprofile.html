@@ -72,14 +72,35 @@
   <tr>
       <td>User Name:</td>
       <td>{{ accountinfor[1] }}</td>
+      <td>
+        <form action="{{ url_for('update_apiarist_infor', userid=accountinfor[0]) }}" method="post">
+          <label for="username"></label>
+          <input type="text" id="username" name="username" placeholder="Update your username">
+          <button type="submit">Submit</button>
+        </form>
+      </td>
   </tr>
   <tr>
       <td>Password:</td>
       <td>{{ accountinfor[2] }}</td>
+      <td>
+        <form action="{{ url_for('update_apiarist_infor', userid=accountinfor[0]) }}" method="post">
+          <label for="password"></label>
+          <input type="password" id="password" name="password" placeholder="Update your password">
+          <button type="submit">Submit</button>
+        </form>
+      </td>
   </tr>
   <tr>
       <td>Login Email:</td>
       <td>{{ accountinfor[3] }}</td>
+      <td>
+        <form action="{{ url_for('update_apiarist_infor', userid=accountinfor[0]) }}" method="post">
+          <label for="email"></label>
+          <input type="email" id="email" name="email" placeholder="Update your login email">
+          <button type="submit">Submit</button>
+        </form>
+      </td>
   </tr>
 </table>
 
@@ -89,20 +110,59 @@
 <h3>My Profile</h3>
 <table>
   <tr>
-      <td>My Name:</td>
-      <td>{{ apiaristinfor[0] }}{{ apiaristinfor[1] }}</td>
+      <td>My First Name:</td>
+      <td>{{ apiaristinfor[0] }}</td>
+      <td>
+        <form action="{{ url_for('update_apiarist_infor', userid=accountinfor[0]) }}" method="post">
+          <label for="apiarist_first_name"></label>
+          <input type="text" id="apiarist_first_name" name="apiarist_first_name" placeholder="Update your first name">
+          <button type="submit">Submit</button>
+        </form>
+      </td>
+  </tr>
+  <tr>
+      <td>My Last Name:</td>
+      <td>{{ apiaristinfor[1] }}</td>
+      <td>
+        <form action="{{ url_for('update_apiarist_infor', userid=accountinfor[0]) }}" method="post">
+          <label for="apiarist_last_name"></label>
+          <input type="text" id="apiarist_last_name" name="apiarist_last_name" placeholder="Update your last name">
+          <button type="submit">Submit</button>
+        </form>
+      </td>
   </tr>
   <tr>
       <td>My Address:</td>
       <td>{{ apiaristinfor[2] }}</td>
+      <td>
+        <form action="{{ url_for('update_apiarist_infor', userid=accountinfor[0]) }}" method="post">
+          <label for="address"></label>
+          <input type="text" id="address" name="address" placeholder="Update your address">
+          <button type="submit">Submit</button>
+        </form>
+      </td>
   </tr>
   <tr>
       <td>Email:</td>
       <td>{{ apiaristinfor[3] }}</td>
+      <td>
+        <form action="{{ url_for('update_apiarist_infor', userid=accountinfor[0]) }}" method="post">
+          <label for="apiarist_email"></label>
+          <input type="text" id="apiarist_email" name="apiarist_email" placeholder="Update your email">
+          <button type="submit">Submit</button>
+        </form>
+      </td>
   </tr>
   <tr>
       <td>Contact Number:</td>
       <td>{{ apiaristinfor[4] }}</td>
+      <td>
+        <form action="{{ url_for('update_apiarist_infor', userid=accountinfor[0]) }}" method="post">
+          <label for="phone"></label>
+          <input type="tel" id="phone" name="phone" placeholder="Update your phone">
+          <button type="submit">Submit</button>
+        </form>
+      </td>
   </tr>
   <tr>
       <td>Joined Date:</td>

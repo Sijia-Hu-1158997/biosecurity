@@ -46,3 +46,59 @@ def apiarist_profile():
 
 
 
+# @app.route("/apiarist_profile/<int:userid>/update_infor", methods=["POST"])
+# def update_apiarist_infor(userid):
+#     if request.method == "POST":
+#         connection = getCursor()
+#         apiarist_first_name = connection.execute("SELECT apiarist_first_name FROM apiarist")
+#         connection.execute("UPDATE apiarist SET apiarist_first_name = %s WHERE userid = %s;", (apiarist_first_name, userid))
+        
+#         return redirect(url_for('apiarist_profile'), apiarist_first_name = apiarist_first_name)
+
+#     return redirect(url_for('apiarist_profile'))
+
+
+
+@app.route("/apiarist_profile/<int:userid>/update_infor", methods=["GET", "POST"])
+def update_apiarist_infor(userid):
+    if request.method == "POST":
+        # Get the form data
+        apiarist_first_name = request.form.get('apiarist_first_name')
+        apiarist_last_name = request.form.get('apiarist_last_name')
+        apiarist_email = request.form.get('apiarist_email')
+        phone = request.form.get('phone')
+        address = request.form.get('address')
+        username = request.form.get('username')
+        password = request.form.get('password')
+        email = request.form.get('email')
+
+        cur = getCursor()
+
+        if apiarist_first_name:
+            cur.execute("UPDATE apiarist SET apiarist_first_name = %s WHERE userid = %s;", (apiarist_first_name, userid))
+
+        if apiarist_last_name:
+            cur.execute("UPDATE apiarist SET apiarist_last_name = %s WHERE userid = %s;", (apiarist_last_name, userid))
+
+        if apiarist_email:
+            cur.execute("UPDATE apiarist SET apiarist_email = %s WHERE userid = %s;", (apiarist_email, userid))
+
+        if phone:
+            cur.execute("UPDATE apiarist SET phone = %s WHERE userid = %s;", (phone, userid))
+
+        if address:
+            cur.execute("UPDATE apiarist SET address = %s WHERE userid = %s;", (address, userid))
+
+        if username:
+            cur.execute("UPDATE secureaccount SET username = %s WHERE userid = %s;", (username, userid))
+        
+        if password:
+            cur.execute("UPDATE secureaccount SET password = %s WHERE userid = %s;", (password, userid))
+        
+        if email:
+            cur.execute("UPDATE secureaccount SET email = %s WHERE userid = %s;", (email, userid))
+
+        print ("Information updated successfully!")
+
+        return redirect(url_for('apiarist_profile'))
+    return redirect(url_for('apiarist_profile'))
