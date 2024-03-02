@@ -142,7 +142,6 @@ def register():
     return render_template('register.html', msg=msg)
 
 
-
 @app.route('/logout')
 def logout():
     # Remove session data, this will log the user out

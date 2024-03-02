@@ -30,7 +30,7 @@ def admin_profile():
             cursor.execute('SELECT userid, username, password, email FROM secureaccount WHERE userid = %s', (session['userid'],))
             accountinfor = cursor.fetchone()
 
-            cursor.execute('SELECT first_name, last_name, email, work_phone_number, hire_date, position, department FROM biosecurity.staff WHERE userid = %s', (session['userid'],))
+            cursor.execute('SELECT first_name, last_name, staff_email, work_phone_number, hire_date, position, department FROM biosecurity.staff WHERE userid = %s', (session['userid'],))
             staffinfor = cursor.fetchone()
 
             return render_template('admin.html', accountinfor=accountinfor, staffinfor=staffinfor)

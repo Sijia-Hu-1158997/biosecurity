@@ -12,14 +12,26 @@ INSERT INTO apiarist (`first_name`, `last_name`, address, email, phone, `date_jo
 INSERT INTO apiarist (`first_name`, `last_name`, address, email, phone, `date_joined`, status) VALUES ('Lori', 'Pye','11 Bidwill St, Mt Cook, Wellington, New Zealand 5067','loripye@gmail.com.nz', '0214284631','2021-08-05','active');
 INSERT INTO apiarist (`first_name`, `last_name`, address, email, phone, `date_joined`, status) VALUES ('GioGio', 'Giovana','5 Jo Place, Te Aro, Otago, New Zealand 3021','giogio@giovana.com.nz', '0743567081','2005-10-12','active');
 
+24 Main St, Karori, Wellington, New Zealand 5011
+johnsmith@google.nz
+0211234231
 
+Sarah White
+2 Tawa Rd, Burnside, Christchurch, New Zealand 4021
+sarahwhite@hotmail.com.nz
+0214567231
+
+-- way to update password to defalt salted abcd1234:
+UPDATE secureaccount
+SET password = '42e1f01ab3f6fbbf9f5984d365abd222c8d39b32626c0081918b169582531013'
+WHERE userid = '1';
 
 -- Insert data into secureaccount with default password 'abcd1234'
 INSERT INTO secureaccount (username, password, email, user_type) VALUES
-('rosemaryevans', 'abcd1234', 'rosemaryevans@123.com', 'admin'),
-('kimwang', 'abcd1234', 'kimwang@123.com.nz', 'staff'),
-('mythiliscott', 'abcd1234', 'mythiliscott@hotmail.com', 'staff'),
-('williambutler', 'abcd1234', 'williamb@outlook.com', 'staff');
+('rosemaryevans', '42e1f01ab3f6fbbf9f5984d365abd222c8d39b32626c0081918b169582531013', 'rosemaryevans@123.com', 'admin'),
+('kimwang', '42e1f01ab3f6fbbf9f5984d365abd222c8d39b32626c0081918b169582531013', 'kimwang@123.com.nz', 'staff'),
+('mythiliscott', '42e1f01ab3f6fbbf9f5984d365abd222c8d39b32626c0081918b169582531013', 'mythiliscott@hotmail.com', 'staff'),
+('williambutler', '42e1f01ab3f6fbbf9f5984d365abd222c8d39b32626c0081918b169582531013', 'williamb@outlook.com', 'staff');
 
 -- Retrieve the inserted userid values from secureaccount
 SET @rosemaryevans_userid = LAST_INSERT_ID(1);
