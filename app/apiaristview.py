@@ -46,18 +46,6 @@ def apiarist_profile():
 
 
 
-# @app.route("/apiarist_profile/<int:userid>/update_infor", methods=["POST"])
-# def update_apiarist_infor(userid):
-#     if request.method == "POST":
-#         connection = getCursor()
-#         apiarist_first_name = connection.execute("SELECT apiarist_first_name FROM apiarist")
-#         connection.execute("UPDATE apiarist SET apiarist_first_name = %s WHERE userid = %s;", (apiarist_first_name, userid))
-        
-#         return redirect(url_for('apiarist_profile'), apiarist_first_name = apiarist_first_name)
-
-#     return redirect(url_for('apiarist_profile'))
-
-
 
 @app.route("/apiarist_profile/<int:userid>/update_infor", methods=["GET", "POST"])
 def update_apiarist_infor(userid):
@@ -102,3 +90,24 @@ def update_apiarist_infor(userid):
 
         return redirect(url_for('apiarist_profile'))
     return redirect(url_for('apiarist_profile'))
+
+
+@app.route('/beeinfor')
+def bee_infor():
+    connection = getCursor()
+    connection.execute("SELECT * FROM bee_pests_and_diseases")
+    bee_basic_infor = connection.fetchall()
+
+    connection.execute("SELECT * FROM bee_infor")
+    bee_detail = connection.fetchall()
+
+    connection.execute("SELECT * FROM images")
+    image_list = connection.fetchall()
+
+    return render_template('beeinfor.html', bee_basic_infor = bee_basic_infor, bee_detail = bee_detail, image_list = image_list)
+
+
+
+
+
+

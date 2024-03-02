@@ -52,6 +52,8 @@
           <p>Welcome to Biosecurity!</p>
           <ul>
             <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('beeinfor') }}">Bee Pest & Disease</a></li>
+            <li><a href="{{ url_for('references') }}">Reference</a></li>
             <li><a href="{{ url_for('logout') }}">Logout</a></li>
 
           </ul>
@@ -66,11 +68,11 @@
 
 <table>
   <tr>
-      <td>User ID:</td>
+      <td>User ID</td>
       <td>{{ accountinfor[0] }}</td>
   </tr>
   <tr>
-      <td>User Name:</td>
+      <td>User Name</td>
       <td>{{ accountinfor[1] }}</td>
       <td>
         <form action="{{ url_for('update_apiarist_infor', userid=accountinfor[0]) }}" method="post">
@@ -81,7 +83,7 @@
       </td>
   </tr>
   <tr>
-      <td>Password:</td>
+      <td>Password</td>
       <td>{{ accountinfor[2] }}</td>
       <td>
         <form action="{{ url_for('update_apiarist_infor', userid=accountinfor[0]) }}" method="post">
@@ -92,7 +94,7 @@
       </td>
   </tr>
   <tr>
-      <td>Login Email:</td>
+      <td>Login Email</td>
       <td>{{ accountinfor[3] }}</td>
       <td>
         <form action="{{ url_for('update_apiarist_infor', userid=accountinfor[0]) }}" method="post">
@@ -110,7 +112,7 @@
 <h3>My Profile</h3>
 <table>
   <tr>
-      <td>My First Name:</td>
+      <td>My First Name</td>
       <td>{{ apiaristinfor[0] }}</td>
       <td>
         <form action="{{ url_for('update_apiarist_infor', userid=accountinfor[0]) }}" method="post">
@@ -121,7 +123,7 @@
       </td>
   </tr>
   <tr>
-      <td>My Last Name:</td>
+      <td>My Last Name</td>
       <td>{{ apiaristinfor[1] }}</td>
       <td>
         <form action="{{ url_for('update_apiarist_infor', userid=accountinfor[0]) }}" method="post">
@@ -132,7 +134,7 @@
       </td>
   </tr>
   <tr>
-      <td>My Address:</td>
+      <td>My Address</td>
       <td>{{ apiaristinfor[2] }}</td>
       <td>
         <form action="{{ url_for('update_apiarist_infor', userid=accountinfor[0]) }}" method="post">
@@ -143,7 +145,7 @@
       </td>
   </tr>
   <tr>
-      <td>Email:</td>
+      <td>Email</td>
       <td>{{ apiaristinfor[3] }}</td>
       <td>
         <form action="{{ url_for('update_apiarist_infor', userid=accountinfor[0]) }}" method="post">
@@ -154,7 +156,7 @@
       </td>
   </tr>
   <tr>
-      <td>Contact Number:</td>
+      <td>Contact Number</td>
       <td>{{ apiaristinfor[4] }}</td>
       <td>
         <form action="{{ url_for('update_apiarist_infor', userid=accountinfor[0]) }}" method="post">
@@ -165,7 +167,7 @@
       </td>
   </tr>
   <tr>
-      <td>Joined Date:</td>
+      <td>Joined Date</td>
       <td>{{ apiaristinfor[5] }}</td>
   </tr>
 </table>

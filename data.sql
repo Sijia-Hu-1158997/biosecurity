@@ -12,6 +12,31 @@ INSERT INTO apiarist (`first_name`, `last_name`, address, email, phone, `date_jo
 INSERT INTO apiarist (`first_name`, `last_name`, address, email, phone, `date_joined`, status) VALUES ('Lori', 'Pye','11 Bidwill St, Mt Cook, Wellington, New Zealand 5067','loripye@gmail.com.nz', '0214284631','2021-08-05','active');
 INSERT INTO apiarist (`first_name`, `last_name`, address, email, phone, `date_joined`, status) VALUES ('GioGio', 'Giovana','5 Jo Place, Te Aro, Otago, New Zealand 3021','giogio@giovana.com.nz', '0743567081','2005-10-12','active');
 
+INSERT INTO images (bee_id, image_id, image_date) VALUES
+('1', '1', 'url('/static/afb.jpeg')')
+('2', '2', 'url('/static/Varroa mites.jpeg')')
+('3', '3', 'url('/static/Nosema.jpeg')')
+('4', '4', 'url('/static/Chalkbrood Disease.jpeg')')
+('5', '5', 'url('/static/Sacbrood.jpeg')')
+('6', '6', 'url('/static/DWV.jpeg')')
+('7', '7', 'url('/static/Black queen cell virus.jpeg')')
+('8', '8', 'url('/static/Wax Moth.jpeg')')
+('9', '9', 'url('/static/Vespula Wasps.jpeg')')
+('10', '10', 'url('/static/PMS.jpeg')')
+
+
+INSERT INTO images (bee_id, image_id, image_data) VALUES
+(1, 1, LOAD_FILE('/app/static/Images/afb.jpeg')),
+(2, 2, LOAD_FILE('/app/static/Images/Varroa mites.jpeg')),
+(3, 3, LOAD_FILE('/app/static/Images/Nosema.jpeg')),
+(4, 4, LOAD_FILE('/app/static/Images/Chalkbrood Disease.jpeg')),
+(5, 5, LOAD_FILE('/app/static/Images/Sacbrood.jpeg')),
+(6, 6, LOAD_FILE('/app/static/Images/DWV.jpeg')),
+(7, 7, LOAD_FILE('/app/static/Images/Black queen cell virus.jpeg.jpeg')),
+(8, 8, LOAD_FILE('/app/static/Images/Wax Moth.jpeg.jpeg')),
+(9, 9, LOAD_FILE('/app/static/Images/Vespula Wasps.jpeg')),
+(10, 10, LOAD_FILE('/app/static/Images/PMS.jpeg'));
+
 24 Main St, Karori, Wellington, New Zealand 5011
 johnsmith@google.nz
 0211234231

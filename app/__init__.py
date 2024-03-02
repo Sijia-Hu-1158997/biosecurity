@@ -153,6 +153,8 @@ def logout():
 
 
 
-
+@app.route('/references')
+def references():
+    return render_template('references.html')
 
 
