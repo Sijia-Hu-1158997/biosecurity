@@ -51,7 +51,8 @@
           <h1>Biosecurity</h1>
           <p>Welcome to Biosecurity!</p>
           <ul>
-            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('staff_profile') }}">My Profile</a></li>
+            <li><a href="{{ url_for('list_apiarist') }}">Apiarist Information</a></li>
             <li><a href="{{ url_for('logout') }}">Logout</a></li>
 
           </ul>
@@ -66,20 +67,41 @@
 
 <table>
   <tr>
-      <td>User ID:</td>
+      <td>User ID</td>
       <td>{{ accountinfor[0] }}</td>
   </tr>
   <tr>
-      <td>User Name:</td>
+      <td>User Name</td>
       <td>{{ accountinfor[1] }}</td>
+      <td>
+        <form action="{{ url_for('update_staff_infor', userid=accountinfor[0]) }}" method="post">
+          <label for="username"></label>
+          <input type="text" id="username" name="username" placeholder="Update your username">
+          <button type="submit">Submit</button>
+        </form>
+      </td>
   </tr>
   <tr>
-      <td>Password:</td>
+      <td>Password</td>
       <td>{{ accountinfor[2] }}</td>
+      <td>
+        <form action="{{ url_for('update_staff_infor', userid=accountinfor[0]) }}" method="post">
+          <label for="password"></label>
+          <input type="password" id="password" name="password" placeholder="Update your password">
+          <button type="submit">Submit</button>
+        </form>
+      </td>
   </tr>
   <tr>
-      <td>Login Email:</td>
+      <td>Login Email</td>
       <td>{{ accountinfor[3] }}</td>
+      <td>
+        <form action="{{ url_for('update_staff_infor', userid=accountinfor[0]) }}" method="post">
+          <label for="email"></label>
+          <input type="email" id="email" name="email" placeholder="Update your email">
+          <button type="submit">Submit</button>
+        </form>
+      </td>
   </tr>
 </table>
 
@@ -89,28 +111,60 @@
 <h3>My Profile</h3>
 <table>
   <tr>
-      <td>My Name:</td>
-      <td>{{ staffinfor[0] }}{{ staffinfor[1] }}</td>
-  </tr>
-  <tr>
-      <td>My Contact Email:</td>
+      <td>My First Name</td>
       <td>{{ staffinfor[2] }}</td>
+      <td>
+        <form action="{{ url_for('update_staff_infor', userid=staffinfor[0]) }}" method="post">
+          <label for="first_name"></label>
+          <input type="text" id="first_name" name="first_name" placeholder="Update your first name">
+          <button type="submit">Submit</button>
+        </form>
+      </td>
   </tr>
   <tr>
-      <td>Work Phone Number:</td>
-      <td>{{ staffinfor[3] }}</td>
+    <td>My Last Name</td>
+    <td>{{ staffinfor[3] }}</td>
+    <td>
+      <form action="{{ url_for('update_staff_infor', userid=accountinfor[0]) }}" method="post">
+        <label for="last_name"></label>
+        <input type="text" id="last_name" name="last_name" placeholder="Update your last name">
+        <button type="submit">Submit</button>
+      </form>
+    </td>
   </tr>
   <tr>
-      <td>Joined Date:</td>
+      <td>My Contact Email</td>
       <td>{{ staffinfor[4] }}</td>
+      <td>
+        <form action="{{ url_for('update_staff_infor', userid=accountinfor[0]) }}" method="post">
+          <label for="staff_email"></label>
+          <input type="email" id="staff_email" name="staff_email" placeholder="Update your email">
+          <button type="submit">Submit</button>
+        </form>
+      </td>
   </tr>
   <tr>
-      <td>Department:</td>
+      <td>Work Phone Number</td>
       <td>{{ staffinfor[5] }}</td>
+      <td>
+        <form action="{{ url_for('update_staff_infor', userid=accountinfor[0]) }}" method="post">
+          <label for="work_phone_number"></label>
+          <input type="tel" id="work_phone_number" name="work_phone_number" placeholder="Update your work phone">
+          <button type="submit">Submit</button>
+        </form>
+      </td>
   </tr>
   <tr>
-      <td>Position:</td>
+      <td>Joined Date</td>
       <td>{{ staffinfor[6] }}</td>
+  </tr>
+  <tr>
+      <td>Department</td>
+      <td>{{ staffinfor[8] }}</td>
+  </tr>
+  <tr>
+      <td>Position</td>
+      <td>{{ staffinfor[7] }}</td>
   </tr>
 </table>
 

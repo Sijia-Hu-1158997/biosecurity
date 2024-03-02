@@ -31,7 +31,7 @@ def staff_profile():
             cursor.execute('SELECT userid, username, password, email FROM secureaccount WHERE userid = %s', (session['userid'],))
             accountinfor = cursor.fetchone()
 
-            cursor.execute('SELECT first_name, last_name, staff_email, work_phone_number, hire_date, position, department FROM biosecurity.staff WHERE userid = %s', (session['userid'],))
+            cursor.execute('SELECT * FROM staff WHERE userid = %s', (session['userid'],))
             staffinfor = cursor.fetchone()
             
             return render_template('staffprofile.html', accountinfor=accountinfor, staffinfor=staffinfor)
@@ -42,38 +42,45 @@ def staff_profile():
 
 
 
-
-@app.route("/manage/apiarist", methods = ["GET", "POST"])
-def manage_apiarist():
+@app.route("/staff_profile/<int:userid>/update_infor", methods=["GET", "POST"])
+def update_staff_infor(userid):
     if request.method == "POST":
-        # Get the form data
-        apiarist_id = request.form.get('apiarist_id')
-        first_name = request.form.get('apiarist.first_name')
-        last_name = request.form.get('apiarist.last_name')
-        address = request.form.get('apiarist.address')
-        email = request.form.get('apiarist.email')
-        phone = request.form.get('apiarist.phone')
-        date_joined = request.form.get('apiarist.date_joined')
-        status = request.form.get('apiarist.status')
-        # Validate required fields
-        if not first_name or not last_name or not email or not phone:
-            print("All fields are required.")
-        else:
-            # Insert the new apiarist into the database
-            cur = getCursor()
-            cur.execute("INSERT INTO apiarist (first_name, last_name, address, email, phone, date_joined) VALUES (%s, %s, %s, %s, %s, %s)",
-                        (first_name, last_name, address, email, phone, date_joined))
-            print ("Apiarist added successfully!")
+        first_name = request.form.get('first_name')
+        last_name = request.form.get('last_name')
+        staff_email = request.form.get('staff_email')
+        work_phone_number = request.form.get('work_phone_number')
+        username = request.form.get('username')
+        password = request.form.get('password')
+        email = request.form.get('email')
 
-            # Redirect to the customer list or any other page you prefer
-            return redirect("/manage/apiarist")
-    return render_template("home.html")
+        cur = getCursor()
+
+        if first_name:
+            cur.execute("UPDATE staff SET first_name = %s WHERE userid = %s;", (first_name, userid))
+        if last_name:
+            cur.execute("UPDATE staff SET last_name = %s WHERE userid = %s;", (last_name, userid))
+        if staff_email:
+            cur.execute("UPDATE staff SET staff_email = %s WHERE userid = %s;", (staff_email, userid))
+        if work_phone_number:
+            cur.execute("UPDATE staff SET work_phone_number = %s WHERE userid = %s;", (work_phone_number, userid))
+        if username:
+            cur.execute("UPDATE secureaccount SET username = %s WHERE userid = %s;", (username, userid))
+        if password:
+            cur.execute("UPDATE secureaccount SET password = %s WHERE userid = %s;", (password, userid))
+        if email:
+            cur.execute("UPDATE secureaccount SET email = %s WHERE userid = %s;", (email, userid))
+
+        print ("Information updated successfully!")
+
+        return redirect(url_for('staff_profile'))
+    return redirect(url_for('staff_profile'))
 
 
 
+@app.route("/listapiarist")
+def list_apiarist():
+    cursor = getCursor()
+    cursor.execute("SELECT * FROM apiarist order by apiarist_id")
+    apiaristresult = cursor.fetchall()
 
-
-
-
-
-
+    return render_template("apiaristlist.html", apiaristlist = apiaristresult)
