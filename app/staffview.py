@@ -34,7 +34,7 @@ def staff_profile():
             cursor.execute('SELECT first_name, last_name, staff_email, work_phone_number, hire_date, position, department FROM biosecurity.staff WHERE userid = %s', (session['userid'],))
             staffinfor = cursor.fetchone()
             
-            return render_template('profile.html', accountinfor=accountinfor, staffinfor=staffinfor)
+            return render_template('staffprofile.html', accountinfor=accountinfor, staffinfor=staffinfor)
         else:
             return "Illegal Access" 
     else:

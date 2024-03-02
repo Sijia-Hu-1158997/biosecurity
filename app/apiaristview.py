@@ -95,16 +95,37 @@ def update_apiarist_infor(userid):
 @app.route('/beeinfor')
 def bee_infor():
     connection = getCursor()
-    connection.execute("SELECT * FROM bee_pests_and_diseases")
+
+    sql = """SELECT bee_pests_and_diseases.bee_id, bee_pests_and_diseases.bee_item_type, bee_pests_and_diseases.present_in_nz, bee_pests_and_diseases.common_name, bee_pests_and_diseases.scientific_name, images.image_id, images.image_data
+          FROM bee_pests_and_diseases
+          JOIN images ON bee_pests_and_diseases.bee_id = images.bee_id;"""
+
+    connection.execute(sql)
+    bee_list = connection.fetchall()
+
+    return render_template('beeinfor.html', bee_list = bee_list)
+
+
+
+@app.route('/beeinfor/<int:bee_id>')
+def view_detail(bee_id):
+    connection = getCursor()
+
+    a = "SELECT * FROM bee_pests_and_diseases WHERE bee_id = %s;"
+    connection.execute(a, (bee_id,))  # Pass bee_id as a tuple
+
     bee_basic_infor = connection.fetchall()
 
-    connection.execute("SELECT * FROM bee_infor")
+    b = "SELECT * FROM bee_infor WHERE bee_id = %s;"
+    connection.execute(b, (bee_id,))  # Pass bee_id as a tuple
     bee_detail = connection.fetchall()
 
-    connection.execute("SELECT * FROM images")
+    c = "SELECT * FROM images WHERE bee_id = %s;"
+    connection.execute(c, (bee_id,))  # Pass bee_id as a tuple
     image_list = connection.fetchall()
 
-    return render_template('beeinfor.html', bee_basic_infor = bee_basic_infor, bee_detail = bee_detail, image_list = image_list)
+
+    return render_template('viewdetail.html', bee_basic_infor = bee_basic_infor, bee_detail = bee_detail, image_list = image_list)
 
 
 
