@@ -25,17 +25,17 @@ INSERT INTO images (bee_id, image_id, image_date) VALUES
 ('10', '10', 'url('/static/PMS.jpeg')')
 
 
-INSERT INTO images (bee_id, image_id, image_data) VALUES
-(1, 1, LOAD_FILE('/app/static/Images/afb.jpeg')),
-(2, 2, LOAD_FILE('/app/static/Images/Varroa mites.jpeg')),
-(3, 3, LOAD_FILE('/app/static/Images/Nosema.jpeg')),
-(4, 4, LOAD_FILE('/app/static/Images/Chalkbrood Disease.jpeg')),
-(5, 5, LOAD_FILE('/app/static/Images/Sacbrood.jpeg')),
-(6, 6, LOAD_FILE('/app/static/Images/DWV.jpeg')),
-(7, 7, LOAD_FILE('/app/static/Images/Black queen cell virus.jpeg.jpeg')),
-(8, 8, LOAD_FILE('/app/static/Images/Wax Moth.jpeg.jpeg')),
-(9, 9, LOAD_FILE('/app/static/Images/Vespula Wasps.jpeg')),
-(10, 10, LOAD_FILE('/app/static/Images/PMS.jpeg'));
+INSERT INTO images (bee_id, image_name, image_data) VALUES
+(1, 'afb', LOAD_FILE('/app/static/Images/afb.jpeg')),
+(2, 'Varroa mites', LOAD_FILE('/app/static/Images/Varroa mites.jpeg')),
+(3, 'Nosema', LOAD_FILE('/app/static/Images/Nosema.jpeg')),
+(4, 'Chalkbrood Disease', LOAD_FILE('/app/static/Images/Chalkbrood Disease.jpeg')),
+(5, 'Sacbrood', LOAD_FILE('/app/static/Images/Sacbrood.jpeg')),
+(6, 'DWV', LOAD_FILE('/app/static/Images/DWV.jpeg')),
+(7, 'Black queen cell virus', LOAD_FILE('/app/static/Images/Black queen cell virus.jpeg.jpeg')),
+(8, 'Wax Moth', LOAD_FILE('/app/static/Images/Wax Moth.jpeg.jpeg')),
+(9, 'Vespula Wasps', LOAD_FILE('/app/static/Images/Vespula Wasps.jpeg')),
+(10, 'PMS', LOAD_FILE('/app/static/Images/PMS.jpeg'));
 
 24 Main St, Karori, Wellington, New Zealand 5011
 johnsmith@google.nz

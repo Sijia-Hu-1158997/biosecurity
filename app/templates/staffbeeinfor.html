@@ -64,33 +64,27 @@
  
 <br>
 
-
-<h3>Manage Bee Pest and Disease Details</h3>
+<h3>Bee Pest and Disease</h3>
 <table style="width:90%">
-  <!-- code to display apiarist-->
   <tr>
-    <th>Bee Pest and Disease ID</th>
+    <th>ID</th>
     <th>Common Name</th>
     <th>Type</th>
     <th>Currently in NZ</th>
-    <th>Charactristics</th>
-    <th>Biology</th>
-    <th>Symptoms</th>
-    <th>More Images</th>
+    <th>Image</th>
   </tr>
-      {% for basic in bee_basic_infor %}
+      {% for basic in bee_list %}
           <tr>
-              <td>{{ basic[0] }}</td>
+              <td><a href="{{ url_for('update_bee_infor', bee_id=basic[0]) }}">{{ basic[0] }}</a></td>
               <td>{{ basic[3] }}</td>
-              <td>{{ basic[1] }} </td>
+              <td>{{ basic[1] }}</td>
               <td>{{ basic[2] }} </td>
-              <td>{% for b in bee_detail %}{{ b [1] }}{% endfor %}</td>
-              <td>{% for b in bee_detail %}{{ b [2] }}{% endfor %}</td>
-              <td>{% for b in bee_detail %}{{ b [3] }}{% endfor %}</td>
-              <td>{% for image in image_list %}{{ image [2] }}{% endfor %}</td>
+              <td>{{ basic[6] }}</td>
           </tr>
       {% endfor %}
 </table>
+
+<br><br>
 
 
 </html>

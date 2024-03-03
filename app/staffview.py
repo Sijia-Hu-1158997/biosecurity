@@ -21,8 +21,8 @@ def getCursor():
     dbconn = connection.cursor()
     return dbconn
 
-
-@app.route('/staff_profile')
+@app.route('/staff')
+@app.route('/staff/profile')
 def staff_profile():
     if 'loggedin' in session:
         if session['user_type'] == 'staff':
@@ -42,7 +42,7 @@ def staff_profile():
 
 
 
-@app.route("/staff_profile/<int:userid>/update_infor", methods=["GET", "POST"])
+@app.route("/staff/profile/<int:userid>/update_infor", methods=["GET", "POST"])
 def update_staff_infor(userid):
     if request.method == "POST":
         first_name = request.form.get('first_name')
@@ -77,10 +77,83 @@ def update_staff_infor(userid):
 
 
 
-@app.route("/listapiarist")
+@app.route("/staff/listapiarist")
 def list_apiarist():
     cursor = getCursor()
     cursor.execute("SELECT * FROM apiarist order by apiarist_id")
     apiaristresult = cursor.fetchall()
 
     return render_template("apiaristlist.html", apiaristlist = apiaristresult)
+
+@app.route('/staff/beeinfor')
+def staff_bee_infor():
+    connection = getCursor()
+
+    sql = """SELECT bee_pests_and_diseases.bee_id, bee_pests_and_diseases.bee_item_type, bee_pests_and_diseases.present_in_nz, bee_pests_and_diseases.common_name, bee_pests_and_diseases.scientific_name, images.image_name, images.image_data
+          FROM bee_pests_and_diseases
+          JOIN images ON bee_pests_and_diseases.bee_id = images.bee_id;"""
+
+    connection.execute(sql)
+    bee_list = connection.fetchall()
+
+    return render_template('staffbeeinfor.html', bee_list = bee_list)
+
+
+
+
+@app.route("/staff/beeinfor/<int:bee_id>", methods=["GET", "POST"])
+def update_bee_infor(bee_id):
+    connection = getCursor()
+
+    a = "SELECT * FROM bee_pests_and_diseases WHERE bee_id = %s;"
+    connection.execute(a, (bee_id,))  # Pass bee_id as a tuple
+
+    bee_basic_infor = connection.fetchall()
+
+    b = "SELECT * FROM bee_infor WHERE bee_id = %s;"
+    connection.execute(b, (bee_id,))  # Pass bee_id as a tuple
+    bee_detail = connection.fetchall()
+
+    c = "SELECT * FROM images WHERE bee_id = %s;"
+    connection.execute(c, (bee_id,))  # Pass bee_id as a tuple
+    image_list = connection.fetchall()
+
+    if request.method == "POST":
+
+        bee_id = request.form.get('bee_id')
+        bee_item_type = request.form.get('bee_item_type')
+        present_in_nz = request.form.get('present_in_nz')
+        common_name = request.form.get('common_name')
+        scientific_name = request.form.get('scientific_name')
+        characteristics = request.form.get('characteristics')
+        biology = request.form.get('biology')
+        symptoms = request.form.get('symptoms')
+        image_name = request.form.get('image_id')
+        image_data = request.form.get('image_data')
+
+        cur = getCursor()
+
+        if bee_item_type:
+            cur.execute("UPDATE bee_pests_and_diseases SET bee_item_type = %s WHERE bee_id = %s;", (bee_item_type, bee_id))
+        if present_in_nz:
+            cur.execute("UPDATE bee_pests_and_diseases SET present_in_nz = %s WHERE bee_id = %s;", (present_in_nz, bee_id))
+        if common_name:
+            cur.execute("UPDATE bee_pests_and_diseases SET common_name = %s WHERE bee_id = %s;", (common_name, bee_id))
+        if scientific_name:
+            cur.execute("UPDATE bee_pests_and_diseases SET scientific_name = %s WHERE bee_id = %s;", (scientific_name, bee_id))
+        if characteristics:
+            cur.execute("UPDATE bee_infor SET characteristics = %s WHERE bee_id = %s;", (characteristics, bee_id))
+        if biology:
+            cur.execute("UPDATE bee_infor SET biology = %s WHERE bee_id = %s;", (biology, bee_id))
+        if symptoms:
+            cur.execute("UPDATE bee_infor SET symptoms = %s WHERE bee_id = %s;", (symptoms, bee_id))
+        if image_name:
+            cur.execute("UPDATE image SET image_name= %s WHERE bee_id = %s;", (image_name, bee_id))
+        if image_data:
+            cur.execute("UPDATE image SET image_date = %s WHERE bee_id = %s;", (image_data, bee_id))
+
+        print ("Information updated successfully!")
+
+        return render_template('managebeeinfor.html')
+
+    return render_template('managebeeinfor.html', bee_basic_infor = bee_basic_infor, bee_detail = bee_detail, image_list = image_list)

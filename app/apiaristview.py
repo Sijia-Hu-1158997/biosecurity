@@ -96,7 +96,7 @@ def update_apiarist_infor(userid):
 def bee_infor():
     connection = getCursor()
 
-    sql = """SELECT bee_pests_and_diseases.bee_id, bee_pests_and_diseases.bee_item_type, bee_pests_and_diseases.present_in_nz, bee_pests_and_diseases.common_name, bee_pests_and_diseases.scientific_name, images.image_id, images.image_data
+    sql = """SELECT bee_pests_and_diseases.bee_id, bee_pests_and_diseases.bee_item_type, bee_pests_and_diseases.present_in_nz, bee_pests_and_diseases.common_name, bee_pests_and_diseases.scientific_name, images.image_name, images.image_data
           FROM bee_pests_and_diseases
           JOIN images ON bee_pests_and_diseases.bee_id = images.bee_id;"""
 
