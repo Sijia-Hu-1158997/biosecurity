@@ -57,6 +57,7 @@
             <li><a href="{{ url_for('staff_profile') }}">My Profile</a></li>
             <li><a href="{{ url_for('list_apiarist') }}">Apiarist Information</a></li>
             <li><a href="{{ url_for('staff_bee_infor') }}">Bee Pest & Disease</a></li>
+            <li><a href="{{ url_for('add_bee_infor') }}">Add New Bee Pest & Disease</a></li>
             <li><a href="{{ url_for('logout') }}">Logout</a></li>
           </ul>
         </nav>
@@ -107,14 +108,22 @@
         <td>
             <form action="{{ url_for('update_bee_infor', bee_id=basic[0]) }}" method="post">
                 <label for="bee_item_type"></label>
-                <input type="text" id="bee_item_type" name="bee_item_type" placeholder="Type update here">
+                <select id="bee_item_type" name="bee_item_type">
+                    <option value="Pest">Pest</option>
+                    <option value="Disease">Disease</option>
+                </select>
                 <button type="submit">Update</button>
             </form>
         </td>
+
+
         <td>
             <form action="{{ url_for('update_bee_infor', bee_id=basic[0]) }}" method="post">
                 <label for="present_in_nz"></label>
-                <input type="text" id="present_in_nz" name="present_in_nz" placeholder="Type update here">
+                <select id="present_in_nz" name="present_in_nz">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
                 <button type="submit">Update</button>
             </form>
         </td>

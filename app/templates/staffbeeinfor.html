@@ -57,6 +57,7 @@
             <li><a href="{{ url_for('staff_profile') }}">My Profile</a></li>
             <li><a href="{{ url_for('list_apiarist') }}">Apiarist Information</a></li>
             <li><a href="{{ url_for('staff_bee_infor') }}">Bee Pest & Disease</a></li>
+            <li><a href="{{ url_for('add_bee_infor') }}">Add New Bee Pest & Disease</a></li>
             <li><a href="{{ url_for('logout') }}">Logout</a></li>
           </ul>
         </nav>
@@ -75,7 +76,7 @@
   </tr>
       {% for basic in bee_list %}
           <tr>
-              <td><a href="{{ url_for('update_bee_infor', bee_id=basic[0]) }}">{{ basic[0] }}</a></td>
+              <td><a href="{{ url_for('view_infor', bee_id=basic[0]) }}">{{ basic[0] }}</a></td>
               <td>{{ basic[3] }}</td>
               <td>{{ basic[1] }}</td>
               <td>{{ basic[2] }} </td>

@@ -101,26 +101,73 @@ def staff_bee_infor():
 
 
 
-@app.route("/staff/beeinfor/<int:bee_id>", methods=["GET", "POST"])
-def update_bee_infor(bee_id):
+@app.route("/staff/beeinfor/<int:bee_id>", methods=["GET"])
+def view_infor(bee_id):
     connection = getCursor()
+    a = "SELECT * FROM bee_pests_and_diseases WHERE bee_id = %s;"
+    connection.execute(a, (bee_id,))  
 
+    bee_basic_infor = connection.fetchall()
+
+    b = "SELECT * FROM bee_infor WHERE bee_id = %s;"
+    connection.execute(b, (bee_id,)) 
+    bee_detail = connection.fetchall()
+
+    c = "SELECT * FROM images WHERE bee_id = %s;"
+    connection.execute(c, (bee_id,))  
+    image_list = connection.fetchall()
+
+    return render_template('managebeeinfor.html', bee_basic_infor = bee_basic_infor, bee_detail = bee_detail, image_list = image_list)
+
+
+@app.route("/staff/beeinfor/<int:bee_id>/update", methods=["POST"])
+def update_bee_infor(bee_id):
+
+    bee_id = request.form.get('bee_id')
+    bee_item_type = request.form.get('bee_item_type')
+    present_in_nz = request.form.get('present_in_nz')
+    common_name = request.form.get('common_name')
+    scientific_name = request.form.get('scientific_name')
+    characteristics = request.form.get('characteristics')
+    biology = request.form.get('biology')
+    symptoms = request.form.get('symptoms')
+    image_name = request.form.get('image_id')
+    image_data = request.files['image_data']
+
+    cur = getCursor()
+
+
+    if bee_item_type:
+        cur.execute("UPDATE bee_pests_and_diseases SET bee_item_type = %s WHERE bee_id = %s;", (bee_item_type, bee_id,))
+    if present_in_nz:
+        cur.execute("UPDATE bee_pests_and_diseases SET present_in_nz = %s WHERE bee_id = %s;", (present_in_nz, bee_id,))
+    if common_name:
+        cur.execute("UPDATE bee_pests_and_diseases SET common_name = %s WHERE bee_id = %s;", (common_name, bee_id,))
+    if scientific_name:
+        cur.execute("UPDATE bee_pests_and_diseases SET scientific_name = %s WHERE bee_id = %s;", (scientific_name, bee_id,))
+    if characteristics:
+        cur.execute("UPDATE bee_infor SET characteristics = %s WHERE bee_id = %s;", (characteristics, bee_id,))
+    if biology:
+        cur.execute("UPDATE bee_infor SET biology = %s WHERE bee_id = %s;", (biology, bee_id,))
+    if symptoms:
+        cur.execute("UPDATE bee_infor SET symptoms = %s WHERE bee_id = %s;", (symptoms, bee_id,))
+    if image_name:
+        cur.execute("UPDATE image SET image_name= %s WHERE bee_id = %s;", (image_name, bee_id,))
+    if image_data:
+        cur.execute("UPDATE image SET image_date = %s WHERE bee_id = %s;", (image_data.read()), bee_id,))
+
+
+    print ("Information updated successfully!")
+
+    return redirect(url_for('view_infor'))
+
+
+
+
+@app.route("/staff/beeinfor/add", methods=["GET", "POST"])
+def add_bee_infor():
     if request.method == "POST":
-
-        a = "SELECT * FROM bee_pests_and_diseases WHERE bee_id = %s;"
-        connection.execute(a, (bee_id,))  # Pass bee_id as a tuple
-
-        bee_basic_infor = connection.fetchall()
-
-        b = "SELECT * FROM bee_infor WHERE bee_id = %s;"
-        connection.execute(b, (bee_id,))  # Pass bee_id as a tuple
-        bee_detail = connection.fetchall()
-
-        c = "SELECT * FROM images WHERE bee_id = %s;"
-        connection.execute(c, (bee_id,))  # Pass bee_id as a tuple
-        image_list = connection.fetchall()
-
-        bee_id = request.form.get('bee_id')
+        # Get the form data
         bee_item_type = request.form.get('bee_item_type')
         present_in_nz = request.form.get('present_in_nz')
         common_name = request.form.get('common_name')
@@ -128,32 +175,32 @@ def update_bee_infor(bee_id):
         characteristics = request.form.get('characteristics')
         biology = request.form.get('biology')
         symptoms = request.form.get('symptoms')
-        image_name = request.form.get('image_id')
-        image_data = request.form.get('image_data')
+        image_name = request.form.get('image_name')
+        
+        # Use request.files to handle file upload
+        image_data = request.files['image_data']
 
-        cur = getCursor()
+        # Validate required fields
+        if not bee_item_type or not present_in_nz or not common_name or not scientific_name or not characteristics or not biology or not symptoms or not image_name:
+            print("All fields are required.")
+        else:
+            # Insert the new infor into the database
+            cur = getCursor()
+            cur.execute("INSERT INTO bee_pests_and_diseases (bee_item_type, present_in_nz, common_name, scientific_name) VALUES (%s, %s, %s, %s)",
+                        (bee_item_type, present_in_nz, common_name, scientific_name))
+            # Retrieve the auto-generated 'bee_id'
+            cur.execute("SELECT LAST_INSERT_ID()")
+            bee_id = cur.fetchone()[0]
 
-        if bee_item_type:
-            cur.execute("UPDATE bee_pests_and_diseases SET bee_item_type = %s WHERE bee_id = %s;", (bee_item_type, bee_id,))
-        if present_in_nz:
-            cur.execute("UPDATE bee_pests_and_diseases SET present_in_nz = %s WHERE bee_id = %s;", (present_in_nz, bee_id,))
-        if common_name:
-            cur.execute("UPDATE bee_pests_and_diseases SET common_name = %s WHERE bee_id = %s;", (common_name, bee_id,))
-        if scientific_name:
-            cur.execute("UPDATE bee_pests_and_diseases SET scientific_name = %s WHERE bee_id = %s;", (scientific_name, bee_id,))
-        if characteristics:
-            cur.execute("UPDATE bee_infor SET characteristics = %s WHERE bee_id = %s;", (characteristics, bee_id,))
-        if biology:
-            cur.execute("UPDATE bee_infor SET biology = %s WHERE bee_id = %s;", (biology, bee_id,))
-        if symptoms:
-            cur.execute("UPDATE bee_infor SET symptoms = %s WHERE bee_id = %s;", (symptoms, bee_id,))
-        if image_name:
-            cur.execute("UPDATE image SET image_name= %s WHERE bee_id = %s;", (image_name, bee_id,))
-        if image_data:
-            cur.execute("UPDATE image SET image_date = %s WHERE bee_id = %s;", (image_data, bee_id,))
+            # Insert into 'bee_infor' using the retrieved 'bee_id'
+            cur.execute("INSERT INTO bee_infor (bee_id, characteristics, biology, symptoms) VALUES (%s, %s, %s, %s)",
+                        (bee_id, characteristics, biology, symptoms))
 
-        print ("Information updated successfully!")
+            # Insert into 'images' using the retrieved 'bee_id'
+            cur.execute("INSERT INTO images (bee_id, image_name, image_data) VALUES (%s, %s, %s)",
+                        (bee_id, image_name, image_data.read()))
 
-        return render_template('managebeeinfor.html',bee_basic_infor = bee_basic_infor, bee_detail = bee_detail, image_list = image_list)
+            print("New Data added successfully!")
 
-    return render_template('managebeeinfor.html', bee_basic_infor = bee_basic_infor, bee_detail = bee_detail, image_list = image_list)
+            return redirect("/staff/beeinfor/add")
+    return render_template("staffaddbeeinfor.html")
