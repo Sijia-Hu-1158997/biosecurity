@@ -81,7 +81,7 @@
 </tr>
     {% for staff in stafflist %}
         <tr>
-            <td>{{ staff[0] }}</td>
+            <td><a href="{{ url_for('admin_update_staff', userid=staff[0]) }}">{{ staff[0] }}</a></td>
             <td>{{ staff[1] }}</td>
             <td>{{ staff[2] }} {{ staff[3] }}</td>
             <td>{{ staff[4] }}</td>
@@ -96,5 +96,8 @@
 
 </body>
 
+<ul>
+  <li><a href="{{ url_for('add_staff') }}">Add Staff</a></li>
+</ul>
 
 </html>

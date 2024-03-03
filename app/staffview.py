@@ -25,7 +25,7 @@ def getCursor():
 @app.route('/staff/profile')
 def staff_profile():
     if 'loggedin' in session:
-        if session['user_type'] == 'staff':
+        if session['user_type'] == 'staff' or session['user_type'] == 'admin':
             cursor = getCursor()
             
             cursor.execute('SELECT userid, username, password, email FROM secureaccount WHERE userid = %s', (session['userid'],))

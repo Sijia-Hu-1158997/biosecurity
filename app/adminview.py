@@ -21,6 +21,7 @@ def getCursor():
     dbconn = connection.cursor()
     return dbconn
 
+@app.route('/admin')
 @app.route('/admin_profile')
 def admin_profile():
     if 'loggedin' in session:
@@ -43,46 +44,95 @@ def admin_profile():
 
 @app.route("/liststaff")
 def staff_list():
-    cursor = getCursor()
-    cursor.execute("SELECT * FROM staff order by staff_number")
-    staffresult = cursor.fetchall()
+    if 'loggedin' in session:
+        if session['user_type'] == 'admin':
+            cursor = getCursor()
+            cursor.execute("SELECT * FROM staff order by staff_number")
+            staffresult = cursor.fetchall()
+        else:
+            return "Illegal Access" 
 
     return render_template("managestaff.html", stafflist = staffresult)
 
 
 
 
-@app.route("/manage/apiarist", methods = ["GET", "POST"])
-def manage_apiarist():
-    if request.method == "POST":
-        # Get the form data
-        apiarist_id = request.form.get('apiarist_id')
-        first_name = request.form.get('apiarist.first_name')
-        last_name = request.form.get('apiarist.last_name')
-        address = request.form.get('apiarist.address')
-        email = request.form.get('apiarist.email')
-        phone = request.form.get('apiarist.phone')
-        date_joined = request.form.get('apiarist.date_joined')
-        status = request.form.get('apiarist.status')
-        # Validate required fields
-        if not first_name or not last_name or not email or not phone:
-            print("All fields are required.")
+@app.route("/add/staff", methods = ["GET", "POST"])
+def add_staff():
+    if 'loggedin' in session:
+        if session['user_type'] == 'admin':
+            if request.method == "POST":
+                # Get the form data
+                first_name = request.form.get('first_name')
+                last_name = request.form.get('last_name')
+                staff_email = request.form.get('staff_email')
+                work_phone_number = request.form.get('work_phone_number')
+                hire_date = request.form.get('hire_date')
+                position = request.form.get('position')
+                department = request.form.get('department')
+                username = request.form.get('username')
+                password = request.form.get('password')
+                email = request.form.get('email')
+                user_type = request.form.get('user_type')
+                # Validate required fields
+                if not first_name or not last_name or not staff_email or not work_phone_number or not hire_date or not position or not department:
+                    print("All fields are required.")
+                else:
+                    # Insert the new apiarist into the database
+                    cur = getCursor()
+
+                    cur.execute("INSERT INTO secureaccount (username, password, email, user_type) VALUES (%s, %s, %s, %s)",
+                                (username, password, email, user_type))
+                    
+                    cur.execute("SELECT LAST_INSERT_ID()")
+                    userid = cur.fetchone()[0]
+                    
+                    cur.execute("INSERT INTO staff (userid, first_name, last_name, staff_email, work_phone_number, hire_date, position, department) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)",
+                                (userid, first_name, last_name, staff_email, work_phone_number, hire_date, position, department))
+                    print ("Staff added successfully!")
+
+                    # Redirect to the customer list or any other page you prefer
+                    return redirect("/liststaff")
         else:
-            # Insert the new apiarist into the database
-            cur = getCursor()
-            cur.execute("INSERT INTO apiarist (first_name, last_name, address, email, phone, date_joined) VALUES (%s, %s, %s, %s, %s, %s)",
-                        (first_name, last_name, address, email, phone, date_joined))
-            print ("Apiarist added successfully!")
-
-            # Redirect to the customer list or any other page you prefer
-            return redirect("/manage/apiarist")
-    return render_template("home.html")
+            return "Illegal Access" 
+        
+    return render_template("manageaddstaff.html")
 
 
 
+@app.route("/liststaff/<int:userid>/update", methods=["GET", "POST"])
+def admin_update_staff(userid):
+    if 'loggedin' in session:
+        if session['user_type'] == 'admin':
+            if request.method == "POST":
+        # Get the form data
+                first_name = request.form.get('first_name')
+                last_name = request.form.get('last_name')
+                staff_email = request.form.get('staff_email')
+                work_phone_number = request.form.get('work_phone_number')
+                hire_date = request.form.get('hire_date')
+                position = request.form.get('position')
+                department = request.form.get('department')
+                cur = getCursor()
 
+                if first_name:
+                    cur.execute("UPDATE staff SET first_name = %s WHERE userid = %s;", (first_name, userid))
+                if last_name:
+                    cur.execute("UPDATE staff SET last_name = %s WHERE userid = %s;", (last_name, userid))
+                if staff_email:
+                    cur.execute("UPDATE staff SET staff_email = %s WHERE userid = %s;", (staff_email, userid))
+                if work_phone_number:
+                    cur.execute("UPDATE staff SET work_phone_number = %s WHERE userid = %s;", (work_phone_number, userid))
+                if hire_date:
+                    cur.execute("UPDATE staff SET hire_date = %s WHERE userid = %s;", (hire_date, userid))
+                if position:
+                    cur.execute("UPDATE staff SET position = %s WHERE userid = %s;", (position, userid))  
+                if department:
+                    cur.execute("UPDATE staff SET department = %s WHERE userid = %s;", (department, userid))
+                print ("Information updated successfully!")
 
-
-
-
+            return redirect(url_for('liststaff'))
+        else:
+            return "Illegal Access" 
+    return redirect(url_for('apiarist_profile'))
 
