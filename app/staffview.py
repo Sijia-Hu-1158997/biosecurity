@@ -214,8 +214,7 @@ def delete_bee_infor(bee_id):
     # Delete from the main table, bee_pests_and_diseases
     cur.execute("DELETE FROM bee_pests_and_diseases WHERE bee_id = %s", (bee_id,))
 
-    # Print message for confirmation (you can remove this if not needed)
     print(f"Data for bee_id {bee_id} deleted successfully!")
 
-    # Redirect to the page where you view the remaining data or any other page you prefer
+    # Redirect to the page 
     return redirect(url_for('view_infor', bee_id=bee_id))

@@ -144,3 +144,12 @@ def admin_update_staff(userid):
     else:
         return redirect("/login")
 
+@app.route("/liststaff/<int:userid>/delete", methods=["POST"])
+def delete_staff(userid):
+    cur = getCursor()
+
+    cur.execute("DELETE FROM staff WHERE userid = %s", (userid,))
+
+    print(f"Data for userid {userid} deleted successfully!")
+
+    return redirect("/liststaff")
