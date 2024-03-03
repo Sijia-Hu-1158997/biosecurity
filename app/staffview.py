@@ -105,20 +105,20 @@ def staff_bee_infor():
 def update_bee_infor(bee_id):
     connection = getCursor()
 
-    a = "SELECT * FROM bee_pests_and_diseases WHERE bee_id = %s;"
-    connection.execute(a, (bee_id,))  # Pass bee_id as a tuple
-
-    bee_basic_infor = connection.fetchall()
-
-    b = "SELECT * FROM bee_infor WHERE bee_id = %s;"
-    connection.execute(b, (bee_id,))  # Pass bee_id as a tuple
-    bee_detail = connection.fetchall()
-
-    c = "SELECT * FROM images WHERE bee_id = %s;"
-    connection.execute(c, (bee_id,))  # Pass bee_id as a tuple
-    image_list = connection.fetchall()
-
     if request.method == "POST":
+
+        a = "SELECT * FROM bee_pests_and_diseases WHERE bee_id = %s;"
+        connection.execute(a, (bee_id,))  # Pass bee_id as a tuple
+
+        bee_basic_infor = connection.fetchall()
+
+        b = "SELECT * FROM bee_infor WHERE bee_id = %s;"
+        connection.execute(b, (bee_id,))  # Pass bee_id as a tuple
+        bee_detail = connection.fetchall()
+
+        c = "SELECT * FROM images WHERE bee_id = %s;"
+        connection.execute(c, (bee_id,))  # Pass bee_id as a tuple
+        image_list = connection.fetchall()
 
         bee_id = request.form.get('bee_id')
         bee_item_type = request.form.get('bee_item_type')
@@ -134,26 +134,26 @@ def update_bee_infor(bee_id):
         cur = getCursor()
 
         if bee_item_type:
-            cur.execute("UPDATE bee_pests_and_diseases SET bee_item_type = %s WHERE bee_id = %s;", (bee_item_type, bee_id))
+            cur.execute("UPDATE bee_pests_and_diseases SET bee_item_type = %s WHERE bee_id = %s;", (bee_item_type, bee_id,))
         if present_in_nz:
-            cur.execute("UPDATE bee_pests_and_diseases SET present_in_nz = %s WHERE bee_id = %s;", (present_in_nz, bee_id))
+            cur.execute("UPDATE bee_pests_and_diseases SET present_in_nz = %s WHERE bee_id = %s;", (present_in_nz, bee_id,))
         if common_name:
-            cur.execute("UPDATE bee_pests_and_diseases SET common_name = %s WHERE bee_id = %s;", (common_name, bee_id))
+            cur.execute("UPDATE bee_pests_and_diseases SET common_name = %s WHERE bee_id = %s;", (common_name, bee_id,))
         if scientific_name:
-            cur.execute("UPDATE bee_pests_and_diseases SET scientific_name = %s WHERE bee_id = %s;", (scientific_name, bee_id))
+            cur.execute("UPDATE bee_pests_and_diseases SET scientific_name = %s WHERE bee_id = %s;", (scientific_name, bee_id,))
         if characteristics:
-            cur.execute("UPDATE bee_infor SET characteristics = %s WHERE bee_id = %s;", (characteristics, bee_id))
+            cur.execute("UPDATE bee_infor SET characteristics = %s WHERE bee_id = %s;", (characteristics, bee_id,))
         if biology:
-            cur.execute("UPDATE bee_infor SET biology = %s WHERE bee_id = %s;", (biology, bee_id))
+            cur.execute("UPDATE bee_infor SET biology = %s WHERE bee_id = %s;", (biology, bee_id,))
         if symptoms:
-            cur.execute("UPDATE bee_infor SET symptoms = %s WHERE bee_id = %s;", (symptoms, bee_id))
+            cur.execute("UPDATE bee_infor SET symptoms = %s WHERE bee_id = %s;", (symptoms, bee_id,))
         if image_name:
-            cur.execute("UPDATE image SET image_name= %s WHERE bee_id = %s;", (image_name, bee_id))
+            cur.execute("UPDATE image SET image_name= %s WHERE bee_id = %s;", (image_name, bee_id,))
         if image_data:
-            cur.execute("UPDATE image SET image_date = %s WHERE bee_id = %s;", (image_data, bee_id))
+            cur.execute("UPDATE image SET image_date = %s WHERE bee_id = %s;", (image_data, bee_id,))
 
         print ("Information updated successfully!")
 
-        return render_template('managebeeinfor.html')
+        return render_template('managebeeinfor.html',bee_basic_infor = bee_basic_infor, bee_detail = bee_detail, image_list = image_list)
 
     return render_template('managebeeinfor.html', bee_basic_infor = bee_basic_infor, bee_detail = bee_detail, image_list = image_list)

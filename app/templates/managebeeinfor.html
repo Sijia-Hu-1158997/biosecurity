@@ -65,32 +65,132 @@
 <br>
 
 
-<h3>Manage Bee Pest and Disease Details</h3>
+
+<h3>Manage Bee Pest and Disease</h3>
+
+
+{% for basic in bee_basic_infor %}<p>Bee Pest and Disease ID: {{ basic[0] }}</p>{% endfor %}
+
+<br>
+
+<h4>Basic Information</h4>
 <table style="width:90%">
   <!-- code to display apiarist-->
   <tr>
-    <th>Bee Pest and Disease ID</th>
     <th>Common Name</th>
+    <th>scientific Name</th>
     <th>Type</th>
     <th>Currently in NZ</th>
+  </tr>
+{% for basic in bee_basic_infor %}
+    <tr>
+        <td>{{ basic[3] }}</td>    
+        <td>{{ basic[4] }}</td>          
+        <td>{{ basic[1] }} </td>
+        <td>{{ basic[2] }} </td>
+    </tr>
+    <tr>
+        <td>
+            <form action="{{ url_for('update_bee_infor', bee_id=basic[0]) }}" method="post">
+                <label for="common_name"></label>
+                <input type="text" id="common_name" name="common_name" placeholder="Type update here">
+                <button type="submit">Update</button>
+            </form>
+        </td>
+        <td>
+            <form action="{{ url_for('update_bee_infor', bee_id=basic[0]) }}" method="post">
+                <label for="scientific_name"></label>
+                <input type="text" id="scientific_name" name="scientific_name" placeholder="Type update here">
+                <button type="submit">Update</button>
+            </form>
+        </td>
+        <td>
+            <form action="{{ url_for('update_bee_infor', bee_id=basic[0]) }}" method="post">
+                <label for="bee_item_type"></label>
+                <input type="text" id="bee_item_type" name="bee_item_type" placeholder="Type update here">
+                <button type="submit">Update</button>
+            </form>
+        </td>
+        <td>
+            <form action="{{ url_for('update_bee_infor', bee_id=basic[0]) }}" method="post">
+                <label for="present_in_nz"></label>
+                <input type="text" id="present_in_nz" name="present_in_nz" placeholder="Type update here">
+                <button type="submit">Update</button>
+            </form>
+        </td>
+    </tr> 
+{% endfor %}
+      
+</table>
+
+<br>
+
+<h4>Manage Descriptions</h4>
+<table style="width:90%">
+<tr>
     <th>Charactristics</th>
     <th>Biology</th>
     <th>Symptoms</th>
-    <th>More Images</th>
-  </tr>
-      {% for basic in bee_basic_infor %}
-          <tr>
-              <td>{{ basic[0] }}</td>
-              <td>{{ basic[3] }}</td>
-              <td>{{ basic[1] }} </td>
-              <td>{{ basic[2] }} </td>
-              <td>{% for b in bee_detail %}{{ b [1] }}{% endfor %}</td>
-              <td>{% for b in bee_detail %}{{ b [2] }}{% endfor %}</td>
-              <td>{% for b in bee_detail %}{{ b [3] }}{% endfor %}</td>
-              <td>{% for image in image_list %}{{ image [2] }}{% endfor %}</td>
-          </tr>
-      {% endfor %}
+</tr>
+{% for b in bee_detail %}
+    <tr>
+        <td>{{ b [1] }}</td>
+        <td>{{ b [2] }}</td>
+        <td>{{ b [3] }}</td>
+    </tr>
+{% endfor %}
+
+{% for basic in bee_basic_infor %}
+    <tr>
+        <td>
+            <form action="{{ url_for('update_bee_infor', bee_id=basic[0]) }}" method="post">
+                <label for="characteristics"></label>
+                <input type="text" id="characteristics" name="characteristics" placeholder="Type update here">
+                <button type="submit">Update</button>
+            </form>
+        </td>
+        <td>
+            <form action="{{ url_for('update_bee_infor', bee_id=basic[0]) }}" method="post">
+                <label for="biology"></label>
+                <input type="text" id="biology" name="biology" placeholder="Type update here">
+                <button type="submit">Update</button>
+            </form>
+        </td>
+        <td>
+            <form action="{{ url_for('update_bee_infor', bee_id=basic[0]) }}" method="post">
+                <label for="symptoms"></label>
+                <input type="text" id="symptoms" name="symptoms" placeholder="Type update here">
+                <button type="submit">Update</button>
+            </form>
+        </td>
+    </tr>
+
+{% endfor %}
+
 </table>
 
 
+<br>
+
+<h4>Manage Images</h4>
+<table style="width:90%">
+<tr>
+    <th>Image Name</th>
+    <th>image</th>
+
+</tr>
+{% for image in image_list %}
+    <tr>
+        <td>{{ image [1] }}</td>
+        <td>{{ image [2] }}</td>
+    </tr>
+{% endfor %}
+
+    </table>
+
+
+
+<br><br>
+
 </html>
+
