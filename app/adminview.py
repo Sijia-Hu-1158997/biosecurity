@@ -113,6 +113,7 @@ def admin_update_staff(userid):
                 hire_date = request.form.get('hire_date')
                 position = request.form.get('position')
                 department = request.form.get('department')
+                staff_status = request.form.get('staff_status')
                 cur = getCursor()
 
                 if first_name:
@@ -129,10 +130,17 @@ def admin_update_staff(userid):
                     cur.execute("UPDATE staff SET position = %s WHERE userid = %s;", (position, userid))  
                 if department:
                     cur.execute("UPDATE staff SET department = %s WHERE userid = %s;", (department, userid))
+                if staff_status:
+                    cur.execute("UPDATE staff SET staff_status = %s WHERE userid = %s;", (staff_status, userid))
                 print ("Information updated successfully!")
-
-            return redirect(url_for('liststaff'))
+            
+            cur = getCursor()
+            cur.execute("SELECT * FROM staff WHERE userid = %s;", (userid,))
+            staff_data = cur.fetchone()
+            return render_template("adminupdatestaff.html", userid=userid, staff=staff_data)
+        
         else:
             return "Illegal Access" 
-    return redirect(url_for('apiarist_profile'))
+    else:
+        return redirect("/login")
 
