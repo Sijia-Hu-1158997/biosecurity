@@ -178,19 +178,18 @@ def add_apiarist():
                 username = request.form.get('username')
                 password = request.form.get('password')
                 email = request.form.get('email')
-                user_type = request.form.get('user_type')
 
-                print(apiarist_first_name, apiarist_last_name, apiarist_email, phone, date_joined, address, username, password, email, user_type)
+                print(apiarist_first_name, apiarist_last_name, apiarist_email, phone, date_joined, address, username, password, email)
 
                 # Validate required fields
-                if not apiarist_first_name or not apiarist_last_name or not apiarist_email or not phone or not date_joined or not address or not username or not password or not email or not user_type:
+                if not apiarist_first_name or not apiarist_last_name or not apiarist_email or not phone or not date_joined or not address or not username or not password or not email:
                     print("All fields are required.")
                 else:
                     # Insert the new apiarist into the database
                     cur = getCursor()
 
-                    cur.execute("INSERT INTO secureaccount (username, password, email, user_type) VALUES (%s, %s, %s, %s)",
-                                (username, password, email, user_type))
+                    cur.execute("INSERT INTO secureaccount (username, password, email) VALUES (%s, %s, %s)",
+                                (username, password, email))
                     
                     cur.execute("SELECT LAST_INSERT_ID()")
                     userid = cur.fetchone()[0]
@@ -204,3 +203,55 @@ def add_apiarist():
             return "Illegal Access" 
         
     return render_template("adminaddapiarist.html")
+
+
+@app.route("/listapiarist/<int:userid>/update", methods=["GET", "POST"])
+def admin_update_apiarist(userid):
+    if 'loggedin' in session:
+        if session['user_type'] == 'admin':
+            if request.method == "POST":
+                updated_apiarist_data = {
+                    'apiarist_first_name' : request.form.get('apiarist_first_name'),
+                    'apiarist_last_name' : request.form.get('apiarist_last_name'),
+                    'apiarist_email' : request.form.get('apiarist_email'),
+                    'phone' : request.form.get('phone'),
+                    'address' : request.form.get('address'),
+                    'date_joined' : request.form.get('date_joined'),
+                    'status' : request.form.get('status'),                    
+
+                }
+                # Remove empty fields to avoid updating with None
+                updated_apiarist_data = {k: v for k, v in updated_apiarist_data.items() if v is not None}
+
+                cur = getCursor()
+
+                for field, value in updated_apiarist_data.items():
+                    if field in ['apiarist_first_name', 'apiarist_last_name', 'apiarist_email', 'phone', 'address', 'date_joined', 'status']:
+                        cur.execute(f"UPDATE apiarist SET {field} = %s WHERE userid = %s;", (value, userid,))
+
+                print("Information updated successfully!")
+
+                return redirect(url_for('admin_update_apiarist'))
+            
+            
+            connection = getCursor()
+            connection.execute("SELECT * FROM apiarist order by apiarist_id")
+            apiaristresult = connection.fetchall()
+
+            return render_template("apiaristlist.html", apiaristlist = apiaristresult)
+        else:
+            return "Illegal Access" 
+
+    else:
+        return redirect("/login")
+
+
+@app.route("/listapiarist/<int:userid>/delete", methods=["POST"])
+def delete_apiarist(userid):
+    cur = getCursor()
+
+    cur.execute("DELETE FROM apiarist WHERE userid = %s", (userid,))
+
+    print(f"Data for userid {userid} deleted successfully!")
+
+    return redirect("/listapiarist")

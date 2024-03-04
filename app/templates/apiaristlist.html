@@ -82,7 +82,7 @@
 </tr>
     {% for apiarist in apiaristlist %}
         <tr>
-            <td>{{ apiarist[0] }}</td>
+            <td><a href="{{ url_for('admin_update_apiarist', userid=apiarist[0]) }}">{{ apiarist[0] }}</a></td>
             <td>{{ apiarist[1] }}</td>
             <td>{{ apiarist[2] }} {{ apiarist[3] }}</td>
             <td>{{ apiarist[4] }}</td>
@@ -94,6 +94,7 @@
     {% endfor %}
 </table>
 
+<p>(Click the ID's link to update apiarist's information)
 
 </body>
 
