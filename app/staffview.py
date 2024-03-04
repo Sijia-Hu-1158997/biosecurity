@@ -77,13 +77,7 @@ def update_staff_infor(userid):
 
 
 
-@app.route("/staff/listapiarist")
-def list_apiarist():
-    cursor = getCursor()
-    cursor.execute("SELECT * FROM apiarist order by apiarist_id")
-    apiaristresult = cursor.fetchall()
 
-    return render_template("apiaristlist.html", apiaristlist = apiaristresult)
 
 @app.route('/staff/beeinfor')
 def staff_bee_infor():
@@ -135,7 +129,6 @@ def update_bee_infor(bee_id):
                     'symptoms': request.form.get('symptoms'),
                     'image_name': request.form.get('image_name'),
                 }
-
                 # Remove empty fields to avoid updating with None
                 updated_data = {k: v for k, v in updated_data.items() if v is not None}
 

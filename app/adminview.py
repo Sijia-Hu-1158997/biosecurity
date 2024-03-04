@@ -155,3 +155,52 @@ def delete_staff(userid):
 
     return redirect("/liststaff")
 
+
+@app.route("/listapiarist")
+def list_apiarist():
+    cursor = getCursor()
+    cursor.execute("SELECT * FROM apiarist order by apiarist_id")
+    apiaristresult = cursor.fetchall()
+
+    return render_template("apiaristlist.html", apiaristlist = apiaristresult)
+
+@app.route("/add/apiarist", methods = ["GET", "POST"])
+def add_apiarist():
+    if 'loggedin' in session:
+        if session['user_type'] == 'admin':
+            if request.method == "POST":
+                apiarist_first_name = request.form.get('apiarist_first_name')
+                apiarist_last_name = request.form.get('apiarist_last_name')
+                apiarist_email = request.form.get('apiarist_email')
+                phone = request.form.get('phone')
+                address = request.form.get('address')
+                date_joined = request.form.get('date_joined')
+                username = request.form.get('username')
+                password = request.form.get('password')
+                email = request.form.get('email')
+                user_type = request.form.get('user_type')
+
+                print(apiarist_first_name, apiarist_last_name, apiarist_email, phone, date_joined, address, username, password, email, user_type)
+
+                # Validate required fields
+                if not apiarist_first_name or not apiarist_last_name or not apiarist_email or not phone or not date_joined or not address or not username or not password or not email or not user_type:
+                    print("All fields are required.")
+                else:
+                    # Insert the new apiarist into the database
+                    cur = getCursor()
+
+                    cur.execute("INSERT INTO secureaccount (username, password, email, user_type) VALUES (%s, %s, %s, %s)",
+                                (username, password, email, user_type))
+                    
+                    cur.execute("SELECT LAST_INSERT_ID()")
+                    userid = cur.fetchone()[0]
+                    
+                    cur.execute("INSERT INTO apiarist (userid, apiarist_first_name, apiarist_last_name, apiarist_email, phone, date_joined, address) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+                                (userid, apiarist_first_name, apiarist_last_name, apiarist_email, phone, date_joined, address))
+                    print ("Apiarist added successfully!")
+
+                    return redirect("/listapiarist")
+        else:
+            return "Illegal Access" 
+        
+    return render_template("adminaddapiarist.html")
