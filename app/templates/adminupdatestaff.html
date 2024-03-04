@@ -64,7 +64,7 @@
 <body style="background-color:#fcf2ea;">
 
 <br>
-<h3>Update Staff Information</h3>
+<h3>Update Basic Information</h3>
 
 <table style="width:90%">
 <!-- code to display staff-->
@@ -73,10 +73,6 @@
     <th>Last Name</th>
     <th>Email</th>
     <th>Work Phone Number</th>
-    <th>Hire Date</th>
-    <th>Position</th>
-    <th>Department</th>
-    <th>Staff Status</th>
 </tr>
 {% if staff %}
         <tr>
@@ -84,10 +80,6 @@
             <td>{{ staff[3] }} </td>
             <td>{{ staff[4] }}</td>
             <td>{{ staff[5] }}</td>
-            <td>{{ staff[6] }}</td>
-            <td>{{ staff[7] }}</td>
-            <td>{{ staff[8] }}</td>
-            <td>{{ staff[9] }}</td>
         </tr>
         <tr>
             <td>
@@ -118,43 +110,64 @@
                     <button type="submit">Update</button>
                 </form>
             </td>
-            <td>
-                <form action="{{ url_for('admin_update_staff', userid=staff[0]) }}" method="post">
-                    <label for="hire_date"></label>
-                    <input type="date" id="hire_date" name="hire_date">
-                    <button type="submit">Update</button>
-                </form>
-            </td>
-            <td>
-                <form action="{{ url_for('admin_update_staff', userid=staff[0]) }}" method="post">
-                    <label for="position"></label>
-                    <input type="text" id="position" name="position" placeholder="Type update here">
-                    <button type="submit">Update</button>
-                </form>
-            </td>
-            <td>
-                <form action="{{ url_for('admin_update_staff', userid=staff[0]) }}" method="post">
-                    <label for="department"></label>
-                    <input type="text" id="department" name="department" placeholder="Type update here">
-                    <button type="submit">Update</button>
-                </form>
-            </td>
-            <td>
-                <form action="{{ url_for('admin_update_staff', userid=staff[0]) }}" method="post">
-                    <label for="staff_status"></label>
-                    <select id="staff_status" name="staff_status">
-                        <option value="active">Active</option>
-                        <option value="inactive">Inactive</option>
-                    </select>
-                    <button type="submit">Update</button>
-                </form>
-            </td>
     
         </tr>
 
 </table>
 
-</body>
+<br><br>
+
+<h3>Update Details</h3>
+
+<table style="width:90%">
+    <tr>
+        <th>Hire Date</th>
+        <th>Position</th>
+        <th>Department</th>
+        <th>Staff Status</th>
+    </tr>
+    <tr>
+            <td>{{ staff[6] }}</td>
+            <td>{{ staff[7] }}</td>
+            <td>{{ staff[8] }}</td>
+            <td>{{ staff[9] }}</td>
+    </tr>
+    <tr>
+        <td>
+            <form action="{{ url_for('admin_update_staff', userid=staff[0]) }}" method="post">
+                <label for="hire_date"></label>
+                <input type="date" id="hire_date" name="hire_date">
+                <button type="submit">Update</button>
+            </form>
+        </td>
+        <td>
+            <form action="{{ url_for('admin_update_staff', userid=staff[0]) }}" method="post">
+                <label for="position"></label>
+                <input type="text" id="position" name="position" placeholder="Type update here">
+                <button type="submit">Update</button>
+            </form>
+        </td>
+        <td>
+            <form action="{{ url_for('admin_update_staff', userid=staff[0]) }}" method="post">
+                <label for="department"></label>
+                <input type="text" id="department" name="department" placeholder="Type update here">
+                <button type="submit">Update</button>
+            </form>
+        </td>
+        <td>
+            <form action="{{ url_for('admin_update_staff', userid=staff[0]) }}" method="post">
+                <label for="staff_status"></label>
+                <select id="staff_status" name="staff_status">
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                </select>
+                <button type="submit">Update</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+
 
 <br><br>
 
@@ -163,8 +176,10 @@
 <form action="{{ url_for('delete_staff', userid=userid) }}" method="post">
     <button type="submit" onclick="return confirm('Are you sure you want to delete this staff?')">Delete</button>
 </form>
+
 {% endif %}
 
+   </body>
 <br><br>
 
 </html>

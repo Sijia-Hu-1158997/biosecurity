@@ -133,6 +133,7 @@ def admin_update_staff(userid):
                 if staff_status:
                     cur.execute("UPDATE staff SET staff_status = %s WHERE userid = %s;", (staff_status, userid))
                 print ("Information updated successfully!")
+                return redirect("/staff/beeinfor")
             
             cur = getCursor()
             cur.execute("SELECT * FROM staff WHERE userid = %s;", (userid,))
@@ -153,3 +154,4 @@ def delete_staff(userid):
     print(f"Data for userid {userid} deleted successfully!")
 
     return redirect("/liststaff")
+

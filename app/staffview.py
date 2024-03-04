@@ -104,9 +104,9 @@ def staff_bee_infor():
 @app.route("/staff/beeinfor/<int:bee_id>", methods=["GET"])
 def view_infor(bee_id):
     connection = getCursor()
+
     a = "SELECT * FROM bee_pests_and_diseases WHERE bee_id = %s;"
     connection.execute(a, (bee_id,))  
-
     bee_basic_infor = connection.fetchall()
 
     b = "SELECT * FROM bee_infor WHERE bee_id = %s;"
@@ -120,46 +120,62 @@ def view_infor(bee_id):
     return render_template('managebeeinfor.html', bee_basic_infor = bee_basic_infor, bee_detail = bee_detail, image_list = image_list)
 
 
-@app.route("/staff/beeinfor/<int:bee_id>/update", methods=["POST"])
+@app.route("/staff/beeinfor/<int:bee_id>/update", methods=["GET", "POST"])
 def update_bee_infor(bee_id):
+    if 'loggedin' in session:
+        if session['user_type'] == 'admin' or session['user_type'] == 'staff':
+            if request.method == "POST":
+                updated_data = {
+                    'bee_item_type': request.form.get('bee_item_type'),
+                    'present_in_nz': request.form.get('present_in_nz'),
+                    'common_name': request.form.get('common_name'),
+                    'scientific_name': request.form.get('scientific_name'),
+                    'characteristics': request.form.get('characteristics'),
+                    'biology': request.form.get('biology'),
+                    'symptoms': request.form.get('symptoms'),
+                    'image_name': request.form.get('image_name'),
+                }
 
-    bee_id = request.form.get('bee_id')
-    bee_item_type = request.form.get('bee_item_type')
-    present_in_nz = request.form.get('present_in_nz')
-    common_name = request.form.get('common_name')
-    scientific_name = request.form.get('scientific_name')
-    characteristics = request.form.get('characteristics')
-    biology = request.form.get('biology')
-    symptoms = request.form.get('symptoms')
-    image_name = request.form.get('image_id')
-    image_data = request.files['image_data']
+                # Remove empty fields to avoid updating with None
+                updated_data = {k: v for k, v in updated_data.items() if v is not None}
 
-    cur = getCursor()
+                cur = getCursor()
+
+                # Update bee_pests_and_diseases table
+                for field, value in updated_data.items():
+                    if field in ['bee_item_type', 'present_in_nz', 'common_name', 'scientific_name']:
+                        cur.execute(f"UPDATE bee_pests_and_diseases SET {field} = %s WHERE bee_id = %s;", (value, bee_id,))
+                    if field in ['characteristics', 'biology', 'symptoms']:
+                        cur.execute(f"UPDATE bee_infor SET {field} = %s WHERE bee_id = %s;", (value, bee_id,))
+                    if field in ['image_name', 'image_data']:
+                        cur.execute(f"UPDATE images SET {field} = %s WHERE bee_id = %s;", (value, bee_id,))
+
+                print("Information updated successfully!")
+
+                return redirect("/staff/beeinfor")
+            
+            connection = getCursor()
+
+            a = "SELECT * FROM bee_pests_and_diseases WHERE bee_id = %s;"
+            connection.execute(a, (bee_id,))  
+            bee_basic_infor = connection.fetchall()
+
+            b = "SELECT * FROM bee_infor WHERE bee_id = %s;"
+            connection.execute(b, (bee_id,)) 
+            bee_detail = connection.fetchall()
+
+            c = "SELECT * FROM images WHERE bee_id = %s;"
+            connection.execute(c, (bee_id,))  
+            image_list = connection.fetchall()
+
+            return render_template("managebeeinfor.html", bee_basic_infor = bee_basic_infor, bee_detail = bee_detail, image_list = image_list)
+        else:
+            return "Illegal Access" 
+
+    else:
+        return redirect("/login")
 
 
-    if bee_item_type:
-        cur.execute("UPDATE bee_pests_and_diseases SET bee_item_type = %s WHERE bee_id = %s;", (bee_item_type, bee_id,))
-    if present_in_nz:
-        cur.execute("UPDATE bee_pests_and_diseases SET present_in_nz = %s WHERE bee_id = %s;", (present_in_nz, bee_id,))
-    if common_name:
-        cur.execute("UPDATE bee_pests_and_diseases SET common_name = %s WHERE bee_id = %s;", (common_name, bee_id,))
-    if scientific_name:
-        cur.execute("UPDATE bee_pests_and_diseases SET scientific_name = %s WHERE bee_id = %s;", (scientific_name, bee_id,))
-    if characteristics:
-        cur.execute("UPDATE bee_infor SET characteristics = %s WHERE bee_id = %s;", (characteristics, bee_id,))
-    if biology:
-        cur.execute("UPDATE bee_infor SET biology = %s WHERE bee_id = %s;", (biology, bee_id,))
-    if symptoms:
-        cur.execute("UPDATE bee_infor SET symptoms = %s WHERE bee_id = %s;", (symptoms, bee_id,))
-    if image_name:
-        cur.execute("UPDATE image SET image_name= %s WHERE bee_id = %s;", (image_name, bee_id,))
-    if image_data:
-        cur.execute("UPDATE image SET image_date = %s WHERE bee_id = %s;", (image_data.read(), bee_id,))
-
-
-    print ("Information updated successfully!")
-
-    return redirect(url_for('view_infor'))
 
 
 
