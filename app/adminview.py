@@ -22,19 +22,10 @@ def getCursor():
     return dbconn
 
 @app.route('/admin')
-@app.route('/admin_profile')
-def admin_profile():
+def admin_dashboard():
     if 'loggedin' in session:
         if session['user_type'] == 'admin':
-            cursor = getCursor()
-            
-            cursor.execute('SELECT userid, username, password, email FROM secureaccount WHERE userid = %s', (session['userid'],))
-            accountinfor = cursor.fetchone()
-
-            cursor.execute('SELECT first_name, last_name, staff_email, work_phone_number, hire_date, position, department FROM biosecurity.staff WHERE userid = %s', (session['userid'],))
-            staffinfor = cursor.fetchone()
-
-            return render_template('admin.html', accountinfor=accountinfor, staffinfor=staffinfor)
+            return render_template('admin.html')
         else:
             return "Illegal Access" 
     else:
@@ -49,10 +40,11 @@ def staff_list():
             cursor = getCursor()
             cursor.execute("SELECT * FROM staff order by staff_number")
             staffresult = cursor.fetchall()
+            return render_template("managestaff.html", stafflist = staffresult)
         else:
             return "Illegal Access" 
-
-    return render_template("managestaff.html", stafflist = staffresult)
+    else:
+        return redirect(url_for('login'))
 
 
 
@@ -102,7 +94,7 @@ def add_staff():
 
 @app.route("/liststaff/<int:userid>/update", methods=["GET", "POST"])
 def admin_update_staff(userid):
-    if 'loggedin' in session:
+    if 'login' in session:
         if session['user_type'] == 'admin':
             if request.method == "POST":
         # Get the form data
@@ -211,39 +203,37 @@ def admin_update_apiarist(userid):
         if session['user_type'] == 'admin':
             if request.method == "POST":
                 updated_apiarist_data = {
-                    'apiarist_first_name' : request.form.get('apiarist_first_name'),
-                    'apiarist_last_name' : request.form.get('apiarist_last_name'),
-                    'apiarist_email' : request.form.get('apiarist_email'),
-                    'phone' : request.form.get('phone'),
-                    'address' : request.form.get('address'),
-                    'date_joined' : request.form.get('date_joined'),
-                    'status' : request.form.get('status'),                    
-
+                    'apiarist_first_name': request.form.get('apiarist_first_name'),
+                    'apiarist_last_name': request.form.get('apiarist_last_name'),
+                    'apiarist_email': request.form.get('apiarist_email'),
+                    'phone': request.form.get('phone'),
+                    'address': request.form.get('address'),
+                    'date_joined': request.form.get('date_joined'),
+                    'status': request.form.get('status'),
                 }
+
                 # Remove empty fields to avoid updating with None
                 updated_apiarist_data = {k: v for k, v in updated_apiarist_data.items() if v is not None}
 
                 cur = getCursor()
-
                 for field, value in updated_apiarist_data.items():
-                    if field in ['apiarist_first_name', 'apiarist_last_name', 'apiarist_email', 'phone', 'address', 'date_joined', 'status']:
-                        cur.execute(f"UPDATE apiarist SET {field} = %s WHERE userid = %s;", (value, userid,))
+                    cur.execute(f"UPDATE apiarist SET {field} = %s WHERE userid = %s;", (value, userid,))
 
                 print("Information updated successfully!")
 
-                return redirect(url_for('admin_update_apiarist'))
-            
-            
-            connection = getCursor()
-            connection.execute("SELECT * FROM apiarist order by apiarist_id")
-            apiaristresult = connection.fetchall()
+            # Fetch the updated data
+            cur = getCursor()
+            cur.execute("SELECT * FROM apiarist WHERE userid = %s", (userid,))
+            apiaristresult = cur.fetchone()
 
-            return render_template("apiaristlist.html", apiaristlist = apiaristresult)
+            return render_template("adminupdateapiarist.html", a=apiaristresult)
+
         else:
-            return "Illegal Access" 
+            return "Illegal Access"
 
     else:
         return redirect("/login")
+
 
 
 @app.route("/listapiarist/<int:userid>/delete", methods=["POST"])

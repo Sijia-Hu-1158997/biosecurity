@@ -75,7 +75,7 @@ def login():
                 elif account[4] == 'apiarist':
                     return redirect(url_for('apiarist_profile'))
                 elif account[4] == 'admin':
-                    return redirect(url_for('admin_profile'))
+                    return redirect(url_for('admin_dashboard'))
             else:
                 #password incorrect
                 msg = 'Incorrect password!'

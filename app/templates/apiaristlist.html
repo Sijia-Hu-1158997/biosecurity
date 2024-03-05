@@ -52,6 +52,7 @@
           <p>Welcome to Biosecurity!</p>
     
           <ul>
+            <li><a href="{{ url_for('admin_dashboard') }}">Admin Dashboard</a></li>
             <li><a href="{{ url_for('staff_profile') }}">My Profile</a></li>
             <li><a href="{{ url_for('list_apiarist') }}">Apiarist Information</a></li>
             <li><a href="{{ url_for('staff_bee_infor') }}">Bee Pest & Disease</a></li>
@@ -94,7 +95,7 @@
     {% endfor %}
 </table>
 
-<p>(Click the ID's link to update apiarist's information)
+<p>(Click the ID's link to update apiarist's information)</p>
 
 </body>
 

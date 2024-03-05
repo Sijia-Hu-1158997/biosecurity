@@ -42,6 +42,12 @@
       li a:hover {
         background-color: #ec9239;
       }
+      body {
+        background-image: url('/static/Images/bee.jpeg');
+        background-repeat: no-repeat;
+        background-attachment: fixed; 
+        background-size: 100% 100%;
+      }
     </style>
   
 </head>
@@ -51,26 +57,36 @@
 <body>
     <nav>
           <h1>Biosecurity</h1>
-          <p>Welcome to Biosecurity!</p>
-    
+          <p>Welcome to Biosecurity! This is admin dashboard.</p>
+
+          <h3>Admin</h3>
           <ul>
-            <li><a href="{{ url_for('admin_profile') }}">Admin Profile</a></li>
-            <li><a href="{{ url_for('add_bee_infor') }}">Add New Bee Pest & Disease</a></li>
-            <li><a href="{{ url_for('staff_list') }}">Manage Staff</a></li>
-            <li><a href="{{ url_for('add_staff') }}">Add Staff</a></li>
-            <li><a href="{{ url_for('add_apiarist') }}">Add Apiarist</a></li>
+            <li><a href="{{ url_for('admin_dashboard') }}">Admin Dashboard</a></li>
+            <li><a href="{{ url_for('staff_profile') }}">My Profile</a></li>
             <li><a href="{{ url_for('logout') }}">Logout</a></li>
           </ul>
         </nav>
-</body>
+
 
 <br>
 
-<h3>Staff Page</h3>
+<h3>Staff</h3>
 <ul>
-<li><a href="{{ url_for('list_apiarist') }}">Apiarist Information</a></li>
-<li><a href="{{ url_for('staff_bee_infor') }}">Manage Bee Pest & Disease</a></li>
+  <li><a href="{{ url_for('staff_list') }}">Manage Staff</a></li>
+  <li><a href="{{ url_for('add_staff') }}">Add Staff</a></li>
+</ul>
+<br>
+<h3>Bee Pest & Disease</h3>
+<ul>
+  <li><a href="{{ url_for('staff_bee_infor') }}">Manage Bee Pest & Disease</a></li>
+  <li><a href="{{ url_for('add_bee_infor') }}">Add New Bee Pest & Disease</a></li>
+</ul>
+<br>
+<h3>Apiarist</h3>
+<ul>
+  <li><a href="{{ url_for('list_apiarist') }}">Apiarist Information</a></li>
+  <li><a href="{{ url_for('add_apiarist') }}">Add Apiarist</a></li>
 </ul>
 
-
+</body>
 </html>
