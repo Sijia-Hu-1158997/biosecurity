@@ -94,7 +94,7 @@ def add_staff():
 
 @app.route("/liststaff/<int:userid>/update", methods=["GET", "POST"])
 def admin_update_staff(userid):
-    if 'login' in session:
+    if 'loggedin' in session:
         if session['user_type'] == 'admin':
             if request.method == "POST":
         # Get the form data
