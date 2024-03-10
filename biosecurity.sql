@@ -70,6 +70,6 @@ FOREIGN KEY (bee_id) REFERENCES bee_pests_and_diseases(bee_id) ON DELETE CASCADE
 CREATE TABLE IF NOT EXISTS images (
     bee_id INT NOT NULL,
     image_name varchar(500) NOT NULL,
-    image_data LONGBLOB,
+    image_data varchar(1000),
     FOREIGN KEY (bee_id) REFERENCES bee_pests_and_diseases(bee_id) ON DELETE CASCADE ON UPDATE CASCADE 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

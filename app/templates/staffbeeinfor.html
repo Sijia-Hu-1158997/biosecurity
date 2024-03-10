@@ -83,7 +83,14 @@
               <td>{{ basic[3] }}</td>
               <td>{{ basic[1] }}</td>
               <td>{{ basic[2] }} </td>
-              <td>{{ basic[6] }}</td>
+              <td>
+                {% if basic[6] != '' %}
+                <img src="{{ basic[6] }}" alt="{{ basic[5] }}" 
+                 class = "image-fluid" style = "max-width: 300px;"/>
+                {% else %}
+                <p>No Image Avaliable</p>
+                {% endif %}
+              </td>
           </tr>
       {% endfor %}
 </table>

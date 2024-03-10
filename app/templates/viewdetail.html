@@ -83,10 +83,12 @@
               <td>{{ basic[3] }}</td>
               <td>{{ basic[1] }} </td>
               <td>{{ basic[2] }} </td>
-              <td>{% for b in bee_detail %}{{ b [1] }}{% endfor %}</td>
-              <td>{% for b in bee_detail %}{{ b [2] }}{% endfor %}</td>
-              <td>{% for b in bee_detail %}{{ b [3] }}{% endfor %}</td>
-              <td>{% for image in image_list %}{{ image [2] }}{% endfor %}</td>
+              <td>{{ bee_detail[0][1] }}</td>
+              <td>{{ bee_detail[0][2] }}</td>
+              <td>{{ bee_detail[0][3] }}</td>
+              <td>                 
+                <img src="{{ image_list[0][2] }}" alt="" 
+                 class = "image-fluid" style = "max-width: 300px;"/></td>
           </tr>
       {% endfor %}
 </table>
