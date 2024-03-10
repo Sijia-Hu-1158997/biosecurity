@@ -37,6 +37,18 @@ INSERT INTO images (bee_id, image_name, image_data) VALUES
 (9, 'Vespula Wasps', '../static/Images/Vespula Wasps.jpeg'),
 (10, 'PMS', '../static/Images/PMS.jpeg');
 
+INSERT INTO images (bee_id, image_name, image_data) VALUES 
+(1, 'afb', 'afb.jpeg'),
+(2, 'Varroa mites', 'Varroa mites.jpeg'),
+(3, 'Nosema', 'Nosema.jpeg'),
+(4, 'Chalkbrood Disease', 'Chalkbrood Disease.jpeg'),
+(5, 'Sacbrood', 'Sacbrood.jpeg'),
+(6, 'DWV', 'DWV.jpeg'),
+(7, 'Black queen cell virus', 'Black queen cell virus.jpeg'),
+(8, 'Wax Moth', 'Wax Moth.jpeg'),
+(9, 'Vespula Wasps', 'Vespula Wasps.jpeg'),
+(10, 'PMS', 'PMS.jpeg');
+
 24 Main St, Karori, Wellington, New Zealand 5011
 johnsmith@google.nz
 0211234231
