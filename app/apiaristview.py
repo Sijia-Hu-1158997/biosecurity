@@ -36,7 +36,7 @@ def apiarist_profile():
             cursor.execute('SELECT userid, username, password, email FROM secureaccount WHERE userid = %s', (session['userid'],))
             accountinfor = cursor.fetchone()
             
-            cursor.execute('SELECT apiarist_first_name, apiarist_last_name, address, apiarist_email, phone, date_joined FROM biosecurity.apiarist WHERE userid = %s', (session['userid'],))
+            cursor.execute('SELECT apiarist_first_name, apiarist_last_name, address, apiarist_email, phone, date_joined FROM apiarist WHERE userid = %s', (session['userid'],))
             apiaristinfor = cursor.fetchone()
 
             return render_template('apiaristprofile.html', accountinfor=accountinfor, apiaristinfor=apiaristinfor)
