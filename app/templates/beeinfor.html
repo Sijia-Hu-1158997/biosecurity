@@ -77,6 +77,8 @@
     <th>Image</th>
   </tr>
       {% for basic in bee_list %}
+
+
           <tr>
               <td>{{ basic[0] }}</td>
               <td>{{ basic[3] }}</td>
@@ -84,7 +86,7 @@
               <td>{{ basic[2] }} </td>
               <td><a href="{{ url_for('view_detail', bee_id=basic[0]) }}">
                 {% if basic[6] != '' %}
-                <img src="{{ basic[6] }}" alt="{{ basic[5] }}" 
+                <img src="{{ basic[6]}}" alt="{{ basic[5] }}" 
                  class = "image-fluid" style = "max-width: 300px;"/>
                 {% else %}
                 <p>No Image Avaliable</p>

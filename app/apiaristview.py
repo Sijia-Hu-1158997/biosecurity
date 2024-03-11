@@ -7,6 +7,7 @@ from flask import redirect
 from flask import url_for
 from flask import session
 import re
+import base64
 from datetime import datetime
 import mysql.connector
 from mysql.connector import FieldType
@@ -102,6 +103,8 @@ def bee_infor():
 
     connection.execute(sql)
     bee_list = connection.fetchall()
+    print(bee_list[0]) #(1, 'disease', 'no', 'American foulbrood', 'Paenibacillus larvae', 'afb', b'../static/Images/afb.jpeg')
+    print(bee_list[0][6]) #b'../static/Images/afb.jpeg'
 
     return render_template('beeinfor.html', bee_list = bee_list)
 
@@ -123,6 +126,15 @@ def view_detail(bee_id):
     c = "SELECT * FROM images WHERE bee_id = %s;"
     connection.execute(c, (bee_id,))  # Pass bee_id as a tuple
     image_list = connection.fetchall()
+
+    d = "SELECT image_data FROM images WHERE bee_id = %s;"
+    connection.execute(d, (bee_id,)) 
+    image_data = connection.fetchall()
+
+    print(image_data) #tuple
+    print(image_data[0]) #list
+    print(image_data[0][0]) #b'../static/Images/afb.jpeg'
+
 
 
     return render_template('viewdetail.html', bee_basic_infor = bee_basic_infor, bee_detail = bee_detail, image_list = image_list)
