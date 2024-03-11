@@ -1,20 +1,6 @@
 -- The apiarist infor should be entered by registering. Not inserting to has the password.
-INSERT INTO secureaccount (username, password, email, user_type) VALUES
-('johnsmith', 'password123', 'johnsmith@google.nz','apiarist'),
-('sarahwhite', 'password456', 'sarahwhite@hotmail.com.nz', 'apiarist'),
-('marywang', 'password789', 'marywang@google.nz', 'apiarist'),
-('loripye', 'passwordabc', 'loripye@gmail.com.nz', 'apiarist'),
-('giogio', 'passwordxyz', 'giogio@giovana.com.nz', 'apiarist');
 
-INSERT INTO apiarist (`first_name`, `last_name`, address, email, phone, `date_joined`, status) VALUES ('John', 'Smith','24 Main St, Karori, Wellington, New Zealand 5011','johnsmith@google.nz', '0211234231','2022-04-02','active');
-INSERT INTO apiarist (`first_name`, `last_name`, address, email, phone, `date_joined`, status) VALUES ('Sarah', 'White','2 Tawa Rd, Burnside, Christchurch, New Zealand 4021','sarahwhite@hotmail.com.nz', '0214567231','2020-04-02','active');
-INSERT INTO apiarist (`first_name`, `last_name`, address, email, phone, `date_joined`, status) VALUES ('Mary', 'Wang','3 Bevin St, NewMarket, Auckland, New Zealand 6022','marywang@google.nz', '0375234231','2023-06-07','active');
-INSERT INTO apiarist (`first_name`, `last_name`, address, email, phone, `date_joined`, status) VALUES ('Lori', 'Pye','11 Bidwill St, Mt Cook, Wellington, New Zealand 5067','loripye@gmail.com.nz', '0214284631','2021-08-05','active');
-INSERT INTO apiarist (`first_name`, `last_name`, address, email, phone, `date_joined`, status) VALUES ('GioGio', 'Giovana','5 Jo Place, Te Aro, Otago, New Zealand 3021','giogio@giovana.com.nz', '0743567081','2005-10-12','active');
-
-
-INSERT INTO images (bee_id, image_name, image_data) VALUES 
-(1, 'afb', '../static/Images/afb.jpeg'),
+INSERT INTO images (bee_id, image_name, image_data) VALUES (57, 'afb', '../static/Images/afb.jpeg');
 (2, 'Varroa mites', '../static/Images/Varroa mites.jpeg'),
 (3, 'Nosema', '../static/Images/Nosema.jpeg'),
 (4, 'Chalkbrood Disease', '../static/Images/Chalkbrood Disease.jpeg'),
@@ -23,19 +9,17 @@ INSERT INTO images (bee_id, image_name, image_data) VALUES
 (7, 'Black queen cell virus', '../static/Images/Black queen cell virus.jpeg'),
 (8, 'Wax Moth', '../static/Images/Wax Moth.jpeg'),
 (9, 'Vespula Wasps', '../static/Images/Vespula Wasps.jpeg'),
-(10, 'PMS', '../static/Images/PMS.jpeg');
-(11, 'European Foulbrood', '../static/Images/European Foulbrood.jpeg')
-(12, 'Small hive beetle', '../static/Images/Small hive beetle.jpeg')
-(13, 'Tracheal mites', '../static/Images/Tracheal mites.jpeg')
-(14, 'Braula fly', '../static/Images/Braula fly.jpeg')
-(15, 'Unwanted bee species', '../static/Images/Unwanted bee species.jpeg')
-(16, 'Asian honey bee', '../static/Images/Asian honey bee.jpeg')
-(17, 'Asian hornets', '../static/Images/Asian hornets.jpeg')
-(18, 'Cape honey bee', '../static/Images/Cape honey bee.jpeg')
-(19, 'Slow bee paralysis virus', '../static/Images/Slow bee paralysis virus.jpeg')
-(20, 'Israeli acute paralysis virus,' '../static/Images/Israeli acute paralysis virus.jpeg')
-
-
+(10, 'PMS', '../static/Images/PMS.jpeg'),
+(47, 'European Foulbrood', '../static/Images/European Foulbrood.jpeg'),
+(48, 'Small hive beetle', '../static/Images/Small hive beetle.jpeg'),
+(49, 'Tracheal mites', '../static/Images/Tracheal mites.jpeg'),
+(50, 'Braula fly', '../static/Images/Braula fly.jpeg'),
+(51, 'Unwanted bee species', '../static/Images/Unwanted bee species.jpeg'),
+(52, 'Asian honey bee', '../static/Images/Asian honey bee.jpeg'),
+(53, 'Asian hornets', '../static/Images/Asian hornets.jpeg'),
+(54, 'Cape honey bee', '../static/Images/Cape honey bee.jpeg'),
+(55, 'Slow bee paralysis virus', '../static/Images/Slow bee paralysis virus.jpeg'),
+(56, 'Israeli acute paralysis virus', '../static/Images/Israeli acute paralysis virus.jpeg');
 
 
 -- way to update password to defalt salted abcd1234:
