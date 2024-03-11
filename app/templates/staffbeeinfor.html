@@ -54,10 +54,12 @@
           <p>Welcome to Biosecurity!</p>
     
           <ul>
+            <li><a href="{{ url_for('admin_dashboard') }}">Admin Dashboard</a></li>
             <li><a href="{{ url_for('staff_profile') }}">My Profile</a></li>
             <li><a href="{{ url_for('list_apiarist') }}">Apiarist Information</a></li>
             <li><a href="{{ url_for('staff_bee_infor') }}">Bee Pest & Disease</a></li>
             <li><a href="{{ url_for('add_bee_infor') }}">Add New Bee Pest & Disease</a></li>
+            <li><a href="{{ url_for('references') }}">Reference</a></li>
             <li><a href="{{ url_for('logout') }}">Logout</a></li>
           </ul>
         </nav>

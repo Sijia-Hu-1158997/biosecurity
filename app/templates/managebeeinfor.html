@@ -59,6 +59,7 @@
             <li><a href="{{ url_for('list_apiarist') }}">Apiarist Information</a></li>
             <li><a href="{{ url_for('staff_bee_infor') }}">Bee Pest & Disease</a></li>
             <li><a href="{{ url_for('add_bee_infor') }}">Add New Bee Pest & Disease</a></li>
+            <li><a href="{{ url_for('references') }}">Reference</a></li>
             <li><a href="{{ url_for('logout') }}">Logout</a></li>
           </ul>
         </nav>
@@ -191,9 +192,15 @@
         <th>Select New Image</th>
     </tr>
     <tr>
-        <td><img src="{{ url_for('static', filename = image_list[0][2]) }}" alt="" class="image-fluid" style="max-width: 300px;"/></td>
         <td>
-            <form action="{{ url_for('add_photo', bee_id=image_list[0][0]) }}" method="post">
+            {% if image_list[0][2] != '' %}
+            <img src="{{ url_for('static', filename = image_list[0][2]) }}" alt="" class="image-fluid" style="max-width: 300px;"/>
+            {% else %}
+            <p>No Image Avaliable</p>
+            {% endif %}
+        </td>
+        <td>
+            <form action="{{ url_for('add_photo', bee_id = image_list[0][0]) }}" method="post">
                 <label for="image_data">Select Photo:</label>
                 <select id="image_data" name="image_data">
                 {% for image_info in all_image %}
@@ -207,8 +214,6 @@
 </table>
 </div>
 <br>
-
-
 
 <br><br>
 
