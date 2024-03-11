@@ -111,35 +111,22 @@ def view_infor(bee_id):
     connection.execute(c, (bee_id,))  
     image_list = connection.fetchall()
 
-    return render_template('managebeeinfor.html', bee_basic_infor = bee_basic_infor, bee_detail = bee_detail, image_list = image_list)
+    d = "SELECT * FROM images"
+    connection.execute(d)  
+    all_image = connection.fetchall()
+
+    return render_template('managebeeinfor.html', bee_basic_infor = bee_basic_infor, bee_detail = bee_detail, image_list = image_list, all_image = all_image)
 
 @app.route("/staff/beeinfor/<int:bee_id>/addphoto", methods=["GET", "POST"])
 def add_photo(bee_id):
     if 'loggedin' in session:
         if session['user_type'] == 'admin' or session['user_type'] == 'staff':
             if request.method == "POST":
-                bee_item_type = request.form.get('bee_item_type')
-                present_in_nz = request.form.get('present_in_nz')
-                common_name = request.form.get('common_name')
-                scientific_name = request.form.get('scientific_name')
-                image_name = request.form.get('image_name')
-                image_data = request.files['image_data']
-                
-                cur = getCursor()
-                
-                cur.execute("INSERT INTO bee_pests_and_diseases (bee_item_type, present_in_nz, common_name, scientific_name) VALUES (%s, %s, %s, %s)",
-                        (bee_item_type, present_in_nz, common_name, scientific_name))
-                # Retrieve the auto-generated 'bee_id'
-                cur.execute("SELECT LAST_INSERT_ID()")
-                bee_id = cur.fetchone()[0]
-
-                if not image_name or not image_data:
-                    print("All fields are required.")
-                else:
-                    cur.execute("INSERT INTO images (bee_id, image_name, image_data) VALUES (%s, %s, %s)",
-                            (bee_id, image_name, image_data.read()))
-                    print("New Data added successfully!")
-                    return redirect("/staff/beeinfor", bee_id=bee_id)
+                image_data = request.form.get('image_data')     
+                cur = getCursor()               
+                cur.execute("UPDATE images SET image_data = %s WHERE bee_id = %s;", (image_data, bee_id,))
+                print("New Data added successfully!")
+                return redirect("/staff/beeinfor")
         else:
             return "Illegal Access" 
     else:
@@ -160,7 +147,6 @@ def update_bee_infor(bee_id):
                     'characteristics': request.form.get('characteristics'),
                     'biology': request.form.get('biology'),
                     'symptoms': request.form.get('symptoms'),
-                    'image_name': request.form.get('image_name'),
                 }
                 # Remove empty fields to avoid updating with None
                 updated_data = {k: v for k, v in updated_data.items() if v is not None}
@@ -205,44 +191,54 @@ def update_bee_infor(bee_id):
 
 @app.route("/staff/beeinfor/add", methods=["GET", "POST"])
 def add_bee_infor():
-    if request.method == "POST":
-        # Get the form data
-        bee_item_type = request.form.get('bee_item_type')
-        present_in_nz = request.form.get('present_in_nz')
-        common_name = request.form.get('common_name')
-        scientific_name = request.form.get('scientific_name')
-        characteristics = request.form.get('characteristics')
-        biology = request.form.get('biology')
-        symptoms = request.form.get('symptoms')
-        image_name = request.form.get('image_name')
-        
-        # Use request.files to handle file upload
-        image_data = request.files['image_data']
+    if 'loggedin' in session:
+        if session['user_type'] == 'admin' or session['user_type'] == 'staff':
+            if request.method == "POST":
+                # Get the form data
+                bee_id = request.form.get('bee_id')
+                bee_item_type = request.form.get('bee_item_type')
+                present_in_nz = request.form.get('present_in_nz')
+                common_name = request.form.get('common_name')
+                scientific_name = request.form.get('scientific_name')
+                characteristics = request.form.get('characteristics')
+                biology = request.form.get('biology')
+                symptoms = request.form.get('symptoms')
+                image_name = request.form.get('image_name')
+                image_data = request.form.get('image_data')
 
-        # Validate required fields
-        if not bee_item_type or not present_in_nz or not common_name or not scientific_name or not characteristics or not biology or not symptoms or not image_name:
-            print("All fields are required.")
-        else:
-            # Insert the new infor into the database
+                cur = getCursor()
+
+                # Validate required fields
+                if not bee_item_type or not present_in_nz or not common_name or not scientific_name or not characteristics or not biology or not symptoms or not image_name:
+                    print("All fields are required.")
+                else:
+                    # Insert the new infor into the database
+                    cur = getCursor()
+
+                    cur.execute("INSERT INTO bee_pests_and_diseases (bee_item_type, present_in_nz, common_name, scientific_name) VALUES (%s, %s, %s, %s)",
+                                (bee_item_type, present_in_nz, common_name, scientific_name))
+                    # Retrieve the auto-generated 'bee_id'
+                    cur.execute("SELECT LAST_INSERT_ID()")
+                    bee_id = cur.fetchone()[0]
+
+                    # Insert into 'bee_infor' using the retrieved 'bee_id'
+                    cur.execute("INSERT INTO bee_infor (bee_id, characteristics, biology, symptoms) VALUES (%s, %s, %s, %s)",
+                                (bee_id, characteristics, biology, symptoms))
+
+                    # Insert into 'images' using the retrieved 'bee_id'
+                    cur.execute("INSERT INTO images (bee_id, image_name, image_data) VALUES (%s, %s, %s)",
+                                (bee_id, image_name, image_data))
+                    print("New Data added successfully!")
+                    return redirect("/staff/beeinfor/add")
             cur = getCursor()
-            cur.execute("INSERT INTO bee_pests_and_diseases (bee_item_type, present_in_nz, common_name, scientific_name) VALUES (%s, %s, %s, %s)",
-                        (bee_item_type, present_in_nz, common_name, scientific_name))
-            # Retrieve the auto-generated 'bee_id'
-            cur.execute("SELECT LAST_INSERT_ID()")
-            bee_id = cur.fetchone()[0]
-
-            # Insert into 'bee_infor' using the retrieved 'bee_id'
-            cur.execute("INSERT INTO bee_infor (bee_id, characteristics, biology, symptoms) VALUES (%s, %s, %s, %s)",
-                        (bee_id, characteristics, biology, symptoms))
-
-            # Insert into 'images' using the retrieved 'bee_id'
-            cur.execute("INSERT INTO images (bee_id, image_name, image_data) VALUES (%s, %s, %s)",
-                        (bee_id, image_name, image_data.read()))
-
-            print("New Data added successfully!")
-
-            return redirect("/staff/beeinfor/add")
-    return render_template("staffaddbeeinfor.html")
+            d = "SELECT * FROM images"
+            cur.execute(d)  
+            all_image = cur.fetchall()
+            return render_template("staffaddbeeinfor.html", all = all_image)
+        else:
+            return "Illegal Access" 
+    else:
+        return redirect("/login")
 
 
 

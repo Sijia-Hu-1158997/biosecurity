@@ -183,40 +183,31 @@
 <br>
 
 <h4>Manage Images</h4>
+
 <div>
 <table>
     <tr>
-        <th>Current Image Name</th>
         <th>Current Image</th>
+        <th>Select New Image</th>
     </tr>
     <tr>
-        <td>{{ image_list[0][1] }}</td>
         <td><img src="{{ url_for('static', filename = image_list[0][2]) }}" alt="" class="image-fluid" style="max-width: 300px;"/></td>
-        </tr>
+        <td>
+            <form action="{{ url_for('add_photo', bee_id=image_list[0][0]) }}" method="post">
+                <label for="image_data">Select Photo:</label>
+                <select id="image_data" name="image_data">
+                {% for image_info in all_image %}
+                <option value="{{ image_info[2] }}">{{ image_info[1] }}</option>
+                {% endfor %}
+                </select>
+                <button type="submit">Change to New Photo</button>
+            </form>
+        </td>
     </tr>
 </table>
 </div>
 <br>
-<div>
-<table>
-    <tr>
-        <th>New Image Name</th>
-        <th>Add New Image</th>
-    </tr>
-    <tr>
-        <td>
-            <label for="image_name">Image Name:</label>
-            <input type="text" id="image_name" name="image_name" required>
-        </td>
-        <td>
-            <label for="image_data"></label>
-            <input type="file" id="image_data" name="image_data" accept="image/*" required>
-        </td>
-    </tr>
-</table>
-<br>
-<button type="submit">Add New Image</button>
-</div>
+
 
 
 <br><br>

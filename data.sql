@@ -33,7 +33,7 @@ INSERT INTO images (bee_id, image_name, image_data) VALUES
 (5, 'Sacbrood', '../static/Images/Sacbrood.jpeg'),
 (6, 'DWV', '../static/Images/DWV.jpeg'),
 (7, 'Black queen cell virus', '../static/Images/Black queen cell virus.jpeg'),
-(8, 'Wax Moth', '../static/Images//Wax Moth.jpeg'),
+(8, 'Wax Moth', '../static/Images/Wax Moth.jpeg'),
 (9, 'Vespula Wasps', '../static/Images/Vespula Wasps.jpeg'),
 (10, 'PMS', '../static/Images/PMS.jpeg');
 
