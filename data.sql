@@ -12,18 +12,6 @@ INSERT INTO apiarist (`first_name`, `last_name`, address, email, phone, `date_jo
 INSERT INTO apiarist (`first_name`, `last_name`, address, email, phone, `date_joined`, status) VALUES ('Lori', 'Pye','11 Bidwill St, Mt Cook, Wellington, New Zealand 5067','loripye@gmail.com.nz', '0214284631','2021-08-05','active');
 INSERT INTO apiarist (`first_name`, `last_name`, address, email, phone, `date_joined`, status) VALUES ('GioGio', 'Giovana','5 Jo Place, Te Aro, Otago, New Zealand 3021','giogio@giovana.com.nz', '0743567081','2005-10-12','active');
 
-INSERT INTO images (bee_id, image_id, image_date) VALUES
-('1', '1', 'url('/static/afb.jpeg')')
-('2', '2', 'url('/static/Varroa mites.jpeg')')
-('3', '3', 'url('/static/Nosema.jpeg')')
-('4', '4', 'url('/static/Chalkbrood Disease.jpeg')')
-('5', '5', 'url('/static/Sacbrood.jpeg')')
-('6', '6', 'url('/static/DWV.jpeg')')
-('7', '7', 'url('/static/Black queen cell virus.jpeg')')
-('8', '8', 'url('/static/Wax Moth.jpeg')')
-('9', '9', 'url('/static/Vespula Wasps.jpeg')')
-('10', '10', 'url('/static/PMS.jpeg')')
-
 
 INSERT INTO images (bee_id, image_name, image_data) VALUES 
 (1, 'afb', '../static/Images/afb.jpeg'),
@@ -36,27 +24,19 @@ INSERT INTO images (bee_id, image_name, image_data) VALUES
 (8, 'Wax Moth', '../static/Images/Wax Moth.jpeg'),
 (9, 'Vespula Wasps', '../static/Images/Vespula Wasps.jpeg'),
 (10, 'PMS', '../static/Images/PMS.jpeg');
+(11, 'European Foulbrood', '../static/Images/European Foulbrood.jpeg')
+(12, 'Small hive beetle', '../static/Images/Small hive beetle.jpeg')
+(13, 'Tracheal mites', '../static/Images/Tracheal mites.jpeg')
+(14, 'Braula fly', '../static/Images/Braula fly.jpeg')
+(15, 'Unwanted bee species', '../static/Images/Unwanted bee species.jpeg')
+(16, 'Asian honey bee', '../static/Images/Asian honey bee.jpeg')
+(17, 'Asian hornets', '../static/Images/Asian hornets.jpeg')
+(18, 'Cape honey bee', '../static/Images/Cape honey bee.jpeg')
+(19, 'Slow bee paralysis virus', '../static/Images/Slow bee paralysis virus.jpeg')
+(20, 'Israeli acute paralysis virus,' '../static/Images/Israeli acute paralysis virus.jpeg')
 
-INSERT INTO images (bee_id, image_name, image_data) VALUES 
-(1, 'afb', 'afb.jpeg'),
-(2, 'Varroa mites', 'Varroa mites.jpeg'),
-(3, 'Nosema', 'Nosema.jpeg'),
-(4, 'Chalkbrood Disease', 'Chalkbrood Disease.jpeg'),
-(5, 'Sacbrood', 'Sacbrood.jpeg'),
-(6, 'DWV', 'DWV.jpeg'),
-(7, 'Black queen cell virus', 'Black queen cell virus.jpeg'),
-(8, 'Wax Moth', 'Wax Moth.jpeg'),
-(9, 'Vespula Wasps', 'Vespula Wasps.jpeg'),
-(10, 'PMS', 'PMS.jpeg');
 
-24 Main St, Karori, Wellington, New Zealand 5011
-johnsmith@google.nz
-0211234231
 
-Sarah White
-2 Tawa Rd, Burnside, Christchurch, New Zealand 4021
-sarahwhite@hotmail.com.nz
-0214567231
 
 -- way to update password to defalt salted abcd1234:
 UPDATE secureaccount
